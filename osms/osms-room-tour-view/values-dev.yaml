@@ -1,6 +1,0 @@
-GlobalAttributes:
-- name: iotGwUrl
-  value: https://iot-gwweb-dev.spaceplat.com
-- name: portalGwUrl
-  value: https://portal-gw-dev.spaceplat.com
-

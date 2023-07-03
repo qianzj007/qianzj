@@ -1,9 +1,0 @@
-
-JavaAttributes:
-- name: JAVA_HOME
-  value: "java -Xms512m -Xmx512m -Dfile.encoding=UTF-8 -Duser.timezone=GMT+08 -jar osms-parking-ak-gw.jar"
-GlobalAttributes:
-- name: nacos_server_addr
-  value: 172.16.163.220:9408
-- name: nacos_namespace
-  value: osms
