@@ -1,5 +1,0 @@
-GlobalAttributes:
-- name: nacos_server_addr
-  value: 172.16.163.220:5408
-- name: nacos_namespace
-  value: hmi
