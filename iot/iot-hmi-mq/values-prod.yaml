@@ -1,0 +1,41 @@
+replicaCount: 2
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/hmi/iot-hmi-mq
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: iot-nacos.external.svc.cluster.local:8832
+- name: nacos_namespace
+  value: hmi-prod
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []
+
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+  - host: hmi-manager-mq.spaceplat.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  tls: []
+
+service:
+  Enabled: true
+  type: NodePort
+  IngressPort: 7080
+  PortScope:
+  - portName: registry
+    port: 7080
+    targetPort: registry
+    protocol: TCP
+    nodePort: 30002

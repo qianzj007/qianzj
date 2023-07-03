@@ -1,0 +1,18 @@
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/iam/iam-business
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+#################################################### 环境变量区域
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 121.37.0.33:8848
+- name: nacos_namespace
+  value: iam
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+  - name: regcred

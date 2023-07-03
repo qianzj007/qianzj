@@ -1,0 +1,50 @@
+# Default values for osms-comment-view.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your temes.
+
+replicaCount: 1
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/osms/osms-comment-view
+  pullPolicy: IfNotPresent
+  tag: ""
+
+service:
+  Enabled: true
+  type: NodePort
+  IngressPort: 80
+  PortScope:
+    - portName: registry
+      port: 80
+      targetPort: 80
+      protocol: TCP
+      nodePort: 32331
+
+Nginx:
+  Enabled: true
+  NginxConfigName: osms-comment-view-configure
+  ContainersMountsAttributes:
+    - name: osms-comment-view-configure
+      mountPath: /etc/nginx/nginx.conf
+      subPath: nginx.conf
+  VolumesAttributes:
+    - name: osms-comment-view-configure
+      configMap:
+        name: osms-comment-view-configure
+
+####### 环境变量
+FrontAddress: 
+  - name: baseUrl                                               
+    value: https://osms-gateway.spaceplat.com
+  - name: portalUrl
+    value: https://portal-gateway.spaceplat.com
+  - name: spaceUrl
+    value: https://portal-gateway.spaceplat.com
+  - name: messageWS
+    value: https://message-channel-prod.spaceplat.com
+  - name: spaasUrl
+    value: https://spaas.spaceplat.com
+  - name: version
+    value: comment-view
+  - name: osmsUrl
+    value: https://osms-gateway.spaceplat.com

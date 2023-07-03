@@ -1,0 +1,26 @@
+replicaCount: 1
+
+image:
+  repository: harbor.space.com/hmi/iot-hmi-business
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 10.0.200.56:5408
+- name: nacos_namespace
+  value: hmi
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+  - name: regcred
+
+
+
+

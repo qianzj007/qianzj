@@ -1,0 +1,13 @@
+image:
+  repository: spaceicloud.tencentcloudcr.com/osms/osms-coupon
+  pullPolicy: IfNotPresent
+
+#################################################### 环境变量区域
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 172.16.162.204:8848
+- name: nacos_namespace
+  value: osms
+  ######################################################################
+
+

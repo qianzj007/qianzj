@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/iot/iot-hmi-mq
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 10.122.144.66:8848
+- name: nacos_namespace
+  value: hmi
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+  - name: regcred

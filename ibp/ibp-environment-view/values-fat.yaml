@@ -1,0 +1,27 @@
+ExternalBackendApiUrl:
+  - name: portalUrl
+    value: http://portal-gateway-fat.space.com
+  - name: baseUrl
+    value: http://gateway-web.fat.svc.spaceiot.local:8000
+  - name: ibpUrl
+    value: http://ibp-gateway-web.fat.svc.spaceiot.local:8000
+  - name: iframeUrl
+    value: http://workorderview.fat.svc.public.local
+  - name: messageUrl
+    value: http://message-gateway.fat.svc.public.local:8550
+  - name: messageWs
+    value: http://message-channel-fat.space.com
+  - name: uploadUrl
+    value: http://gateway-web.fat.svc.spaceiot.local:8000
+  - name: vedioUrl
+    value: http://gateway-web.fat.svc.spaceiot.local:8000
+  - name: spaceUrl
+    value: http://portal-gateway-fat.space.com/space/v1
+  - name: workOrderUrl
+    value: http://workorderview.fat.svc.public.local
+  - name: parkingUrl
+    value: http://ibp-gateway-web.fat.svc.spaceiot.local:8000
+  - name: SpaasViewUrl
+    value: http://spaas-fat.space.com
+  - name: datacenterUrl
+    value: http://data-fat.space.com

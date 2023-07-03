@@ -1,0 +1,18 @@
+
+service:
+  Enabled: false
+  type: NodePort
+  IngressPort: 7336
+  PortScope:
+  - portName: registry
+    port: 7336
+    targetPort: registry
+    protocol: TCP
+    nodePort: 32016
+
+#################################################### 环境变量区域
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 172.16.163.220:9408
+- name: nacos_namespace
+  value: osms

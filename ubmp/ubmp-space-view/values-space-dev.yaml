@@ -1,0 +1,19 @@
+serviceCompatibles:
+  Enabled: false
+####### 环境变量
+PrefixeAddress:
+- name: pefixe
+  value: ubmp-space-view
+FrontAddress: []
+BackendApi: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl:
+- name: envLogo
+  value: dev
+- name: baseUrl
+  value: https://portal-gw-dev.spaceplat.com
+- name: portalUrl
+  value: https://portal-gw-dev.spaceplat.com
+
+
+

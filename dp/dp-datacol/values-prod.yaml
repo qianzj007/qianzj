@@ -1,0 +1,24 @@
+image:
+  repository: spaceicloud.tencentcloudcr.com/dp/dp-datacol
+  pullPolicy: IfNotPresent
+
+service:
+  Enabled: false
+  type: NodePort
+  IngressPort: 9170
+  PortScope:
+  - portName: registry
+    port: 9170
+    targetPort: registry
+    protocol: TCP
+    nodePort: 32016
+
+#################################################### 环境变量区域
+GlobalAttributes:
+- name: nacos_server_addr
+  value: osms-nacos.external.svc.cluster.local:883
+- name: nacos_namespace
+  value: prod
+######################################################################
+
+

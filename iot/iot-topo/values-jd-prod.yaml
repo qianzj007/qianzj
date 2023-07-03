@@ -1,0 +1,53 @@
+replicaCount: 1
+
+
+image:
+  repository: harbor.space.com/hmi/topoview
+  pullPolicy: IfNotPresent
+  tag: ""
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+  - name: regcred
+
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+  - host: topo.gemdale-st.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  tls: []
+
+
+
+
+####### 环境变量
+FrontAddress: []
+BackendApiUrl:
+- name: envLogo
+  value: prod
+- name: portalUrl
+  value: https://portal-gw.gemdale-st.com
+- name: SOCKET_URL
+  value: ws://hmi-mq.gemdale-st.com/manager/mq/datawebsocket
+- name: BASE_URL
+  value: https://hmi-service.gemdale-st.com
+- name: PASE_INFO_URL
+  value: https://topo.gemdale-st.com
+- name: PASE_INFO_BASE_URL
+  value: https://portal-gw.gemdale-st.com/portal/v1
+- name: IS_NEW_PLATEFORM
+  value: "1"
+- name: SOCKET_LOCK_URL
+  value: ws://hmi-service.gemdale-st.com/manager/hmi/datawebsocket
+- name: IOT_URL
+  value: https://iot-gwweb.gemdale-st.com
+- name: IBP_URL
+  value: https://ibp-gwweb.gemdale-st.com
+

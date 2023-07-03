@@ -1,0 +1,42 @@
+image:
+  repository: spaceicloud.tencentcloudcr.com/portal/osms-restaurant-view
+  pullPolicy: IfNotPresent
+  tag: ""
+
+
+service:
+  Enabled: false
+  type: NodePort
+  IngressPort: 80
+  PortScope:
+    - portName: registry
+      port: 80
+      targetPort: 80
+      protocol: TCP
+      nodePort: 31216
+
+####### 环境变量
+FrontAddress: 
+  - name: baseUrl
+    value: http://192.168.0.120:32000
+  - name: portalUrl
+    value: http://http://192.168.0.161:30103
+  - name: spaceUrl
+    value: http://http://192.168.0.161:30103
+  - name: messageWS
+    value: http://192.168.0.19:30211
+  - name: spaasUrl
+    value: http://192.168.0.19:30222
+  - name: version
+    value: osms-restaurant-view
+  - name: osmsUrl
+    value: http://192.168.0.120:32000
+  - name: uploadUrl
+    value: http://gateway-web.osms.svc.spaceiot.local:8000
+  - name: iframeUrl
+    value: http://192.168.0.19:30222
+  - name: workOrderUrl
+    value: http://192.168.0.19:30222
+  - name: messageUrl
+    value: http://message-gateway.osms.svc.public.local:8550
+

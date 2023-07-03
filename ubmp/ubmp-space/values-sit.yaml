@@ -1,0 +1,99 @@
+serviceCompatibles:
+  Enabled: true
+#################################################### 环境变量区域
+JavaAttributes:
+  - name: JAVA_HOME
+    value: "java -Xms512m -Xmx512m -Dfile.encoding=UTF-8 -Duser.timezone=GMT+08 -jar ubmp-space-server.jar"
+GlobalAttributes:
+  - name: nacos_server_addr
+    value: nacos-sit.space.com:8848
+  - name: nacos_namespace
+    value: ubmp-sit
+  - name: MysqlUrl
+    value: mysql-portal.space.com
+  - name: MysqlPort
+    value: "3308"
+  - name: MysqlUsername
+    value: portal
+  - name: MysqlPassword
+    value: o1A7xNJneWKqMKaK
+  - name: RedisUrl
+    value: redis-haproxy.middleware.svc.portal.local
+  - name: RedisPort
+    value: "6379"
+  - name: RedisPassword
+    value: Wanzhu@sby!
+  - name: ElasticsearchUrl
+    value: elasticsearch-master.middleware-sit.svc.public.local
+  - name: ElasticsearchPort
+    value: "9200"
+  - name: ElasticsearchUsername
+    value: elastic
+  - name: ElasticsearchPassword
+    value: Wanzhu@sby!
+  - name: rocketmqUrl
+    value: sit-mq.space.com
+  - name: rocketmqPort
+    value: "9876"
+FrontAddress:
+  - name: portalUrl
+    value: portal-sit.space.com
+  - name: iotUrl
+    value: iot-sit.space.com
+  - name: osmsUrl
+    value: osms-sit.space.com
+  - name: spaasUrl
+    value: spaas-sit.space.com
+  - name: dataReportUrl
+    value: data-report-sit.space.com
+  - name: investmentUrl
+    value: investment-sit.space.com
+BackendApiUrl:
+  - name: portalAPIUrl
+    value: portal-gateway-sit.space.com
+  - name: iotAPIUrl
+    value: iot-gateway-sit.space.com
+  - name: osmsAPIUrl
+    value: osms-gateway-sit.spaceplat.com
+  - name: spaasAPIUrl
+    value: spaas-gateway-sit.space.com
+  - name: dataReportAPIUrl
+    value: data-report-gateway-sit.space.com
+  - name: investmentAPIUrl
+    value: investment-gateway-sit.space.com
+# 生产、sim、uat环境接口地址
+ExternalFrontAddress:
+  - name: EportalUrl
+    value: portal-sit.spaceplat.com
+  - name: EiotUrl
+    value: iot-sit.spaceplat.com
+  - name: EosmsUrl
+    value: osms-sit.spaceplat.com
+  - name: EspaasUrl
+    value: spaas-sit.spaceplat.com
+  - name: EdataReportUrl
+    value: data-report-sit.spaceplat.com
+  - name: EinvestmentUrl
+    value: investment-sit.spaceplat.com
+ExternalBackendApiUrl:
+  - name: EportalAPIUrl
+    value: portal-gateway-sit.spaceplat.com
+  - name: EiotAPIUrl
+    value: iot-gateway-sit.spaceplat.com
+  - name: EosmsAPIUrl
+    value: osms-gateway-sit.spaceplat.com
+  - name: EspaasAPIUrl
+    value: spaas-gateway-sit.spaceplat.com
+  - name: EdataReportAPIUrl
+    value: data-report-gateway-sit.spaceplat.com
+  - name: EinvestmentAPIUrl
+    value: investment-gateway-sit.spaceplat.com
+######################################################################
+
+
+
+
+
+
+
+

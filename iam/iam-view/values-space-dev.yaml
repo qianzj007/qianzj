@@ -1,0 +1,15 @@
+####### 环境变量
+PrefixeAddress: []
+#  - name: pefixe
+#    value: space
+SystemInterface:
+- name: baseUrl
+  value: https://iam-gw-dev.spaceplat.com
+- name: portalUrl
+  value: https://portal-gw-dev.spaceplat.com
+- name: uploadUrl
+  value: https://iam-gw-dev.spaceplat.com
+- name: bpmUrl
+  value: https://spaas-view-dev.spaceplat.com
+- name: spaasUrl
+  value: https://spaas-view-dev.spaceplat.com

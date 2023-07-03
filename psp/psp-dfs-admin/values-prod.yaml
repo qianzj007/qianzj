@@ -1,0 +1,282 @@
+###########################################################################################################
+########################################## 业务环境 变量 统一配置 #################
+#说明：修改变量如下：
+#  EnvironmentAnnotations
+#  EnvironmentGlobal
+#  EnvironmentSidecar
+#  EnvironmentCharacteristic
+#  EnvironmentPublic
+#  EnvironmentInterface
+#》》》》》》》》》》》》》》》》》》》注解：EnvironmentAnnotations ：唯一环境标识符号，代表着是哪个环境，属于那个业务线
+EnvironmentAnnotations:
+  ServiceBusinessLine: psp
+  ServiceEnvironment: prod
+  ServiceNmae: psp-dfs-admin
+#》》》》》》》》》》》》》》》》》》》》》》》》全局环境变量：EnvironmentGlobal{{$env}} #$env：部署环境
+EnvironmentGlobal:
+- name: nacos_server_addr
+  value: spaas-nacos.external.svc.cluster.local:8831
+- name: nacos_namespace
+  value: psp-prod
+#》》》》》》》》》》》》》》》》》》》》》》》》》边车模式环境变量：EnvironmentSidecar
+EnvironmentSidecar: []
+#  - name: JAVA_OPTS
+#    value: "-javaagent:/usr/skywalking/agent/skywalking-agent.jar"
+#  - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
+#    value: "skywalking-oap.skywalking.svc.portal.local:11800"
+#  - name: SW_AGENT_NAME
+#    value: V3-PROD
+#  - name: SW_AGENT_AUTHENTICATION
+#    value: "tsw_site@example"
+#》》》》》》》》》》》》》》》》》》》》》》 特性接口环境变量：EnvironmentCharacteristic
+EnvironmentCharacteristic: []
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》 中级间环境变量：EnvironmentPublic
+EnvironmentPublic:
+- name: MysqlOSMSUrl
+  value: public-mysql.external.svc.cluster.local
+- name: MysqlOSMSPort
+  value: "3306"
+- name: MysqlOSMSUsername
+  value: spaas
+- name: MysqlOSMSPassword
+  value: h@K7gSa@aILPkfIV
+- name: MysqlSpaasUrl
+  value: public-mysql.external.svc.cluster.local
+- name: MysqlSpaasPort
+  value: "3306"
+- name: MysqlSpaasUsername
+  value: spaas
+- name: MysqlSpaasPassword
+  value: h@K7gSa@aILPkfIV
+- name: RedisUrl
+  value: spaas-redis.external.svc.cluster.local
+- name: RedisPort
+  value: "6379"
+- name: RedisPassword
+  value: ' '
+- name: ElasticsearchUrl
+  value: es.external.svc.cluster.local
+- name: ElasticsearchPort
+  value: "9200"
+- name: ElasticsearchUsername
+  value: elastic
+- name: ElasticsearchPassword
+  value: Wanzhu@sby!
+- name: rocketmqUrl
+  value: rocketmq.external.svc.cluster.local
+- name: rocketmqPort
+  value: "9876"
+#业务接口环境变量：EnvironmentInterface
+EnvironmentInterface:
+- name: portalUrl
+  value: https://portal.spaceplat.com
+- name: portalAPIUrl
+  value: http://10.17.0.16:8078
+- name: EportalUrl
+  value: https://portal.spaceplat.com
+- name: EportalAPIUrl
+  value: https://portal-gateway.spaceplat.com
+- name: iotUrl
+  value: https://iot.spaceplat.com
+- name: iotAPIUrl
+  value: http://iot-gateway-web.spaceicloud.com:8000
+- name: EiotUrl
+  value: https://iot.spaceplat.com
+- name: EiotAPIUrl
+  value: https://iot-gateway-web.spaceplat.com
+- name: osmsUrl
+  value: https://osms.spaceplat.com
+- name: osmsAPIUrl
+  value: http://osms-interconnect.spaceicloud.com:8006
+- name: EosmsUrl
+  value: https://osms.spaceplat.com
+- name: EosmsAPIUrl
+  value: https://osms-gateway.spaceplat.com
+- name: spaasUrl
+  value: https://spaas.spaceplat.com
+- name: spaasAPIUrl
+  value: 10.17.2.16:9900
+- name: EspaasUrl
+  value: https://spaas.spaceplat.com
+- name: EspaasAPIUrl
+  value: https://spaas-gateway.spaceplat.com
+- name: dataReportUrl
+  value: http://data-report-gateway-sit.space.com
+- name: EdataReportUrl
+  value: https://data-report-sit.spaceplat.com
+- name: investmentUrl
+  value: https://investment.spaceplat.com
+- name: investmentAPIUrl
+  value: http://iam-gateway.spaceicloud.com:8101
+- name: EinvestmentUrl
+  value: https://investment.spaceplat.com
+- name: EinvestmentAPIUrl
+  value: https://investment-gateway.spaceplat.com
+
+EnvironmentSidecar: []
+EnvironmentCharacteristic: []
+################################################################################################################
+###############################################################################################################
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》--- 是否开启污点
+Tolerations:
+  Enabled: false
+  TolerationsAttributes:
+  - key: "middleware"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
+
+
+##############################################################################################################
+#############################################  ingress.yaml    #######################################################
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  # kubernetes.io/tls-acme: "true"
+  hosts:
+  - host: psp-dfs-admin.spaceplat.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+#    hosts:
+#      - chart-example.local
+
+##############################################################################################################
+################################################################################################################
+replicaCount: 1
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》  镜像定义
+image:
+  repository: harbor.space.com/psp/psp-dfs-admin
+  pullPolicy: IfNotPresent
+  tag: "latest"
+# 》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》 - 是否开启镜像认证
+ImagePullSecrets:
+  Enabled: false
+  Attributes:
+  - name: dasdad
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》---  是否开启资源限制
+resources:
+  Enabled: false
+  ResourcesAttributes:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》--- 是否开启健康检查
+HealthCheck:
+  Enabled: treu
+  EetectAttributes:
+    startupProbe:
+      failureThreshold: 10
+      httpGet:
+        path: /actuator/health
+        port: registry
+        scheme: HTTP
+      initialDelaySeconds: 60
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 20
+    livenessProbe:
+      failureThreshold: 3
+      tcpSocket:
+        port: registry
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 10
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /actuator/health
+        port: registry
+        scheme: HTTP
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 10
+
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》---  定义pord的端口
+Deployment:
+  Enabled: true
+  Ports:
+  - name: registry
+    containerPort: 36020
+    protocol: TCP
+######################################################## service.yaml #######################
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》-- 是否开启 链路兼容
+############### 是否开启链路兼容
+Servicecompatible:
+  Enabled: false
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》-- 是否开启 ClusterIP 网络IP
+ClusterIPService:
+  Enable: false
+  type: ClusterIP
+  ApplicationPort: 36020
+  ClusterExternalPorts:
+  - portName: registry
+    protocol: TCP
+    port: 36020
+    targetPort: registry
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》-- 是否开 NodePort 网络类型
+NodePortService:
+  Enable: false
+  type: NodePort
+  ClusterExternalPorts:
+  - portName: registry
+    protocol: TCP
+    port: 36020
+    targetPort: registry
+    nodePort: 32000
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》- LoadBalancer 网络类型
+LoadBalancerPortService:
+  Enable: false
+  type: LoadBalancer
+  ClusterExternalPorts:
+  - portName: registry
+    port: 36020 # 开启pod端口
+    targetPort: registry # 开启pod映射到容器内部的端口
+    protocol: TCP
+    nodePort: 36020
+
+
+
+
+##》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》
+###########################################################》》》》》》》》》》》》》》》》》》》》》》》
+############################## 以下变量值 丢弃 ###########################################################################
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+nodeSelector: {}
+affinity: {}
+nameOverride: ""
+fullnameOverride: ""
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+podAnnotations: {}
+podSecurityContext: {}
+# fsGroup: 2000
+securityContext: {}
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+#  {{- if .Values.Deployment.Enable}}
+#  {{- toYaml . | nindent 12 }}
+#  {{- end }}
+############################## 以上变量值 丢弃 ###########################################################################

@@ -1,0 +1,266 @@
+###########################################################################################################
+########################################## 业务环境 变量 统一配置 #################
+#说明：修改变量如下：
+#  EnvironmentAnnotations
+#  EnvironmentGlobal
+#  EnvironmentSidecar
+#  EnvironmentCharacteristic
+#  EnvironmentPublic
+#  EnvironmentInterface
+#》》》》》》》》》》》》》》》》》》》注解：EnvironmentAnnotations ：唯一环境标识符号，代表着是哪个环境，属于那个业务线
+EnvironmentAnnotations:
+  ServiceBusinessLine: psp
+  ServiceEnvironment: sit
+  ServiceNmae: psp-dfs-admin
+#》》》》》》》》》》》》》》》》》》》》》》》》全局环境变量：EnvironmentGlobal{{$env}} #$env：部署环境
+EnvironmentGlobal:
+  - name: JAVA_HOME
+    value: java -noverify -server -Xmx400M -Xms400M -Xmn160M -Xss512K -XX:-UseAdaptiveSizePolicy -XX:SurvivorRatio=6 -XX:MetaspaceSize=128M -XX:MaxMetaspaceSize=192M -XX:MaxDirectMemorySize=300M -Dfile.encoding=UTF-8 -Duser.timezone=GMT+08 -jar psp-dfs-admin.jar
+  - name: nacos_server_addr
+    value: nacos-cs.middleware-sit.svc.public.local:8848
+  - name: nacos_namespace
+    value:  psp-sit
+#》》》》》》》》》》》》》》》》》》》》》》》》》边车模式环境变量：EnvironmentSidecar
+EnvironmentPublic:
+  - name: MysqlUrl
+    value: mysql-public.space.com
+  - name: MysqlPort
+    value: "3309"
+  - name: MysqlUsername
+    value: space
+  - name: MysqlPassword
+    value: Wanzhu@space!
+  - name: RedisUrl
+    value: redis.middleware-sit.svc.public.local
+  - name: RedisPort
+    value: "6379"
+  - name: RedisPassword
+    value: Wanzhu@sby!
+  - name: ElasticsearchUrl
+    value: elasticsearch-master.middleware-sit.svc.public.local
+  - name: ElasticsearchPort
+    value: "9200"
+  - name: ElasticsearchPortz
+    value: "9300"
+  - name: ElasticsearchUsername
+    value: elastic
+  - name: ElasticsearchPassword
+    value: Wanzhu@sby!
+  - name: rocketmqUrl
+    value: sit-mq.space.com
+  - name: rocketmqPort
+    value: "9876"
+#业务接口环境变量：EnvironmentInterface
+EnvironmentInterface:
+  - name: portalUrl
+    value: portal-sit.space.com
+  - name: portalAPIUrl
+    value: portal-gateway-sit.space.com
+  - name: EportalUrl
+    value: portal-sit.spaceplat.com
+  - name: EportalAPIUrl
+    value: portal-gateway-sit.spaceplat.com
+  - name: iotUrl
+    value: iot-sit.space.com
+  - name: iotAPIUrl
+    value: iot-gateway-sit.space.com
+  - name: EiotUrl
+    value: iot-sit.spaceplat.com
+  - name: EiotAPIUrl
+    value: iot-gateway-sit.spaceplat.com
+  - name: osmsUrl
+    value: osms-sit.space.com
+  - name: osmsAPIUrl
+    value: osms-gateway-sit.spaceplat.com
+  - name: EosmsUrl
+    value: osms-sit.spaceplat.com
+  - name: EosmsAPIUrl
+    value: osms-sit.spaceplat.com
+  - name: spaasUrl
+    value: spaas-sit.space.com
+  - name: spaasAPIUrl
+    value: spaas-gateway-sit.space.com
+  - name: EspaasUrl
+    value: spaas-sit.spaceplat.com
+  - name: EspaasAPIUrl
+    value: spaas-gateway-sit.spaceplat.com
+  - name: dataReportUrl
+    value: data-report-gateway-sit.space.com
+  - name: EdataReportUrl
+    value: data-report-gateway-sit.spaceplat.com
+  - name: investmentUrl
+    value: investment-sit.space.com
+  - name: investmentAPIUrl
+    value: investment-gateway-sit.space.com
+  - name: EinvestmentUrl
+    value: investment-sit.spaceplat.com
+  - name: EinvestmentAPIUrl
+    value: investment-gateway-sit.spaceplat.com
+
+EnvironmentSidecar: []
+EnvironmentCharacteristic: []
+################################################################################################################
+###############################################################################################################
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》--- 是否开启污点
+Tolerations:
+  Enabled: false
+  TolerationsAttributes:
+    - key: "middleware"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
+
+
+##############################################################################################################
+#############################################  ingress.yaml    #######################################################
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  # kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: psp-dfs-admin-dev.space.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+##############################################################################################################
+################################################################################################################
+replicaCount: 1
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》  镜像定义
+image:
+  repository: harbor.space.com/psp/psp-dfs-admin
+  pullPolicy: IfNotPresent
+  tag: "latest"
+# 》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》 - 是否开启镜像认证
+ImagePullSecrets:
+  Enabled: false
+  Attributes:
+     - name: dasdad
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》---  是否开启资源限制
+resources:
+  Enabled: false
+  ResourcesAttributes:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》--- 是否开启健康检查
+HealthCheck:
+  Enabled: treu
+  EetectAttributes:
+    startupProbe:
+      failureThreshold: 10
+      httpGet:
+        path: /actuator/health
+        port: registry
+        scheme: HTTP
+      initialDelaySeconds: 60
+      periodSeconds: 5
+      successThreshold: 1
+      timeoutSeconds: 20
+    livenessProbe:
+      failureThreshold: 3
+      tcpSocket:
+        port: registry
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 10
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /actuator/health
+        port: registry
+        scheme: HTTP
+      periodSeconds: 20
+      successThreshold: 1
+      timeoutSeconds: 10
+
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》---  定义pord的端口
+Deployment:
+  Enabled: true
+  Ports:
+    - name: registry
+      containerPort: 36020
+      protocol: TCP
+######################################################## service.yaml #######################
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》-- 是否开启 链路兼容
+############### 是否开启链路兼容
+Servicecompatible:
+  Enabled: false
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》-- 是否开启 ClusterIP 网络IP
+ClusterIPService:
+  Enable: false
+  type: ClusterIP
+  ApplicationPort: 36020
+  ClusterExternalPorts:
+    - portName: registry
+      protocol: TCP
+      port: 36020
+      targetPort: registry
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》-- 是否开 NodePort 网络类型
+NodePortService:
+  Enable: false
+  type: NodePort
+  ClusterExternalPorts:
+    - portName: registry
+      protocol: TCP
+      port: 36020
+      targetPort: registry
+      nodePort: 32000
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》- LoadBalancer 网络类型
+LoadBalancerPortService:
+  Enable: false
+  type: LoadBalancer
+  ClusterExternalPorts:
+    - portName: registry
+      port: 36020  # 开启pod端口
+      targetPort: registry # 开启pod映射到容器内部的端口
+      protocol: TCP
+      nodePort: 36020
+
+
+
+
+##》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》
+###########################################################》》》》》》》》》》》》》》》》》》》》》》》
+############################## 以下变量值 丢弃 ###########################################################################
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+nodeSelector: {}
+affinity: {}
+nameOverride: ""
+fullnameOverride: ""
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+podAnnotations: {}
+podSecurityContext: {}
+# fsGroup: 2000
+securityContext: {}
+  # capabilities:
+  #   drop:
+  #   - ALL
+  # readOnlyRootFilesystem: true
+  # runAsNonRoot: true
+# runAsUser: 1000
+#  {{- if .Values.Deployment.Enable}}
+#  {{- toYaml . | nindent 12 }}
+#  {{- end }}
+############################## 以上变量值 丢弃 ###########################################################################

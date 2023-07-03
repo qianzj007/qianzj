@@ -1,0 +1,36 @@
+replicaCount: 1
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/ibp/ibp-energy
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+  - name: regcred
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 10.122.144.66:8848
+- name: nacos_namespace
+  value: ibp
+
+HostAliases:
+  Enable: true
+  HostAliasessAttributes:
+  - ip: "127.0.0.1"
+    hostnames:
+    - hadoop001
+  - ip: "127.0.0.1"
+    hostnames:
+    - hadoop002
+  - ip: "127.0.0.1"
+    hostnames:
+    - hadoop003
+
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []

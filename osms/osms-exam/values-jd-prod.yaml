@@ -1,0 +1,23 @@
+image:
+  repository: spaceicloud.tencentcloudcr.com/osms/osms-exam
+  pullPolicy: IfNotPresent
+
+service:
+  Enabled: false
+  type: NodePort
+  IngressPort: 8032
+  PortScope:
+  - portName: registry
+    port: 8032
+    targetPort: registry
+    protocol: TCP
+    nodePort: 32016
+
+#################################################### 环境变量区域
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 10.0.200.56:5408
+- name: nacos_namespace
+  value: osms
+######################################################################
+

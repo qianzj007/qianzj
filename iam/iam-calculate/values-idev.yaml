@@ -1,0 +1,70 @@
+#################################################### 环境变量区域
+GlobalAttributes:
+  - name: nacos_server_addr
+    value: nacos-hs.middleware-dev.svc.investment.local:8848
+  - name: nacos_namespace
+    value: iam-idev
+  - name: MysqlUrl
+    value: mysql-portal.space.com
+  - name: MysqlPort
+    value: "3307"
+  - name: MysqlUsername
+    value: portal
+  - name: MysqlPassword
+    value: o1A7xNJneWKqMKaK
+  - name: RedisUrl
+    value: redis-haproxy.middleware.svc.portal.local
+  - name: RedisPort
+    value: "6379"
+  - name: RedisPassword
+    value: Wanzhu@sby!
+  - name: ElasticsearchUrl
+    value: elasticsearch-master.middleware-dev.svc.public.local
+  - name: ElasticsearchPort
+    value: "9200"
+  - name: ElasticsearchUsername
+    value: elastic
+  - name: ElasticsearchPassword
+    value: Wanzhu@sby!
+  - name: rocketmqUrl
+    value: dev-mq.space.com
+  - name: rocketmqPort
+    value: "9876"
+  - name: portalUrl
+    value: portal-idev.space.com
+  - name: portalAPIUrl
+    value: portal-gateway-idev.space.com
+  - name: EportalUrl
+    value: portal-diev.spaceplat.com
+  - name: EportalAPIUrl
+    value: portal-gateway-idev.spaceplat.com
+  - name: iotUrl
+    value: iot-idev.space.com
+  - name: iotAPIUrl
+    value: iot-gateway-idev.space.com
+  - name: EiotUrl
+    value: iot-idev.spaceplat.com
+  - name: EiotAPIUrl
+    value: iot-gateway-idev.spaceplat.com
+  - name: osmsUrl
+    value: osms-idev.space.com
+  - name: osmsAPIUrl
+    value: osms-gateway-idev.spaceplat.com
+  - name: EosmsUrl
+    value: osms-idev.spaceplat.com
+  - name: spaasUrl
+    value: spaas-idev.space.com
+  - name: EspaasUrl
+    value: spaas-gateway-idev.spaceplat.com
+  - name: dataReportUrl
+    value: data-report-gateway-idev.space.com
+  - name: EdataReportUrl
+    value: data-report-idev.spaceplat.com
+  - name: investmentUrl
+    value: investment-idev.space.com
+  - name: investmentAPIUrl
+    value: investment-gateway-idev.space.com
+  - name: EinvestmentUrl
+    value: investment-idev.spaceplat.com
+  - name: EinvestmentAPIUrl
+    value: investment-gateway-idev.spaceplat.com

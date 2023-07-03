@@ -1,0 +1,10 @@
+GlobalAttributes:
+- name: nacos_server_addr
+  value: nacos-cs.middleware-uat.svc.spaceiot-uat.local:8848
+- name: nacos_namespace
+  value: devops
+
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []

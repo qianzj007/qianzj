@@ -1,0 +1,44 @@
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: topo-uat.spaceplat.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+
+####### 环境变量
+FrontAddress: []
+BackendApiUrl:
+  - name: portalUrl
+    value: https://portal-gateway-uat.spaceplat.com
+  - name: SOCKET_URL
+    value: wss://hmi-manager-mq-uat.spaceplat.com/manager/mq/datawebsocket
+  - name: BASE_URL
+    value: https://hmi-manager-service-uat.spaceplat.com
+  - name: PASE_INFO_URL
+    value: https://topo-uat.spaceplat.com
+  - name: PASE_INFO_BASE_URL
+    value: https://portal-gateway-uat.spaceplat.com/portal/v1
+  - name: IS_NEW_PLATEFORM
+    value: "1"
+  - name: SOCKET_LOCK_URL
+    value: wss://hmi-manager-service-uat.spaceplat.com/manager/hmi/datawebsocket
+  - name: IOT_URL
+    value: https://iot-gateway-web-uat.spaceplat.com
+  - name: IBP_URL
+    value: https://ibp-gateway-web-uat.spaceplat.com
+
+
+
+
+
+
+
+
+

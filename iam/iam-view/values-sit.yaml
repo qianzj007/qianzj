@@ -1,0 +1,15 @@
+####### 环境变量
+PrefixeAddress: []
+#  - name: pefixe
+#    value: space
+SystemInterface:
+  - name: baseUrl
+    value: http://iam-gw-sit.space.com
+  - name: portalUrl
+    value: http://portal-gateway-sit.space.com
+  - name: bpmUrl
+    value: http://spaas-gateway-sit.space.com
+  - name: spaasUrl
+    value: https://spaas-sit.space.com
+  - name: uploadUrl
+    value: http://file-service.dev.svc.public.local:9902

@@ -1,0 +1,34 @@
+replicaCount: 2
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/iot/iot-gateway-app
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 10.122.144.66:8848
+- name: nacos_namespace
+  value: iot
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+  - host: iot-gwapp-uat.lenovo.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  tls: []
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+  - name: regcred

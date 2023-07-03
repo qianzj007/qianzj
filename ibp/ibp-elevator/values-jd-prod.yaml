@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: harbor.space.com/ibp/ibp-elevator
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+  - name: regcred
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 10.0.200.56:9408
+- name: nacos_namespace
+  value: ibp
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []

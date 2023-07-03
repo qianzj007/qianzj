@@ -1,0 +1,92 @@
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+    - name: regcred
+serviceCompatibles:
+  Enabled: true
+####### 环境变量
+PrefixeAddress: []
+#  - name: pefixe
+#    value: opt
+FrontAddress: []
+BackendApi: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl:
+  - name: envLogo
+    value: uat
+  - name: baseUrl
+    value: https://portal-gateway-uat.spaceplat.com
+  - name: portalUrl
+    value: https://portal-gateway-uat.spaceplat.com
+  - name: messageUrl
+    value: https://cbb-gateway-web-uat.spaceplat.com
+  - name: messageWs
+    value: https://message-channel-uat.spaceplat.com
+  - name: spaceUrl
+    value: https://portal-gateway-uat.spaceplat.com
+  - name: logstorage
+    value: https://investment-logstorage-uat.spaceplat.com
+  - name: spaasUrl
+    value: https://spaas-uat.spaceplat.com
+  - name: propertyUrl
+    value: https://estate-uat.spaceplat.com
+  - name: cbbUrl
+    value: https://cbb-gateway-web-uat.spaceplat.com
+  - name: pmsUrl
+    value: https://pms-gateway-web-uat.spaceplat.com
+  - name: portalWs
+    value: http://backend.uat.svc.portal-uat.local:5708
+  - name: iotviewUrl
+    value: https://iot-uat.spaceplat.com
+  - name: osmsUrl
+    value: https://osms-uat.spaceplat.com
+  - name: osmsApiUrl
+    value: https://osms-gateway-uat.spaceplat.com
+  - name: investmentviewUrl
+    value: https://investment-uat.spaceplat.com
+  - name: envDomain
+    value: .spaceplat.com
+
+
+
+Tolerations:
+  Enabled: false
+  TolerationsAttributes:
+    - key: "iam"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
+
+
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: chart-example.local
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+
+### 一般以下情况很少去修改，修改的场景为云上或者私有化场景
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+    - name: regsecret
+service:
+  Enabled: false
+  type: NodePort
+  IngressPort: 80
+  PortScope:
+    - portName: registry
+      port: 80
+      targetPort: registry
+      protocol: TCP
+      nodePort: 300106
+

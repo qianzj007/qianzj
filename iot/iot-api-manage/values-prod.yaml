@@ -1,0 +1,29 @@
+replicaCount: 1
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/iot/api-manage
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 121.37.0.33:8848
+- name: nacos_namespace
+  value: op
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+  - host: api-manage.spaceplat.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  tls: []

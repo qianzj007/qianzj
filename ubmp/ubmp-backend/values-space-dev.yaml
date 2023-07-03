@@ -1,0 +1,22 @@
+JavaAttributes:
+- name: JAVA_HOME
+  value: "java -Xms512m -Xmx512m -Dfile.encoding=UTF-8 -Duser.timezone=GMT+08 -jar ubmp-backend-server.jar"
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 172.16.163.220:2408
+- name: nacos_namespace
+  value: ubmp
+
+Privatization: #定义资源属性挂载
+  Enabled: true
+  PrivateCloudAttributes:
+  - name: cloudEnv
+    value: PublicCloud
+  LicenseAttributesvolumeMounts: #定义pvc的名称
+  - name: license-certificate
+    mountPath: /portal/license
+  LicenseAttributesVolumes: ## 指定挂载到容器内部的路径
+  - name: license-certificate
+    hostPath:
+      path: /portal/backend
+      type: DirectoryOrCreate

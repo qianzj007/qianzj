@@ -1,0 +1,17 @@
+replicaCount: 2
+
+image:
+  repository: harbor.space.com/ibp/ibp-energy
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 172.16.163.220:5408
+- name: nacos_namespace
+  value: ibp
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []

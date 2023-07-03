@@ -1,0 +1,46 @@
+image:
+  repository: harbor.space.com/iam/iam-logstorage
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+  - name: regcred
+#################################################### 环境变量区域
+GlobalAttributes:
+- name: nacos_server_addr
+  value: nacos-cs.middleware-uat.svc.investment-uat.local:8848
+- name: nacos_namespace
+  value: iam-uat
+- name: MysqlUrl
+  value: mysql-uat.space.com
+- name: MysqlPort
+  value: "3306"
+- name: MysqlUsername
+  value: root
+- name: MysqlPassword
+  value: Wanzhu@sby!
+- name: RedisUrl
+  value: redis-haproxy.middleware.svc.portal.local
+- name: RedisPort
+  value: "6379"
+- name: RedisPassword
+  value: Wanzhu@sby!
+- name: ElasticsearchUrl
+  value: elasticsearch-master.middleware-uat.svc.public-uat.local
+- name: ElasticsearchPort
+  value: "9200"
+- name: ElasticsearchUsername
+  value: elastic
+- name: ElasticsearchPassword
+  value: Wanzhu@sby!
+- name: rocketmqUrl
+  value: uat-mq.space.com
+- name: rocketmqPort
+  value: "9876"
+SystemInterface:
+- name: portalUrl
+  value: portal-local.space.com
+- name: portalAPI
+  value: gateway.local.svc.portal.local:8078

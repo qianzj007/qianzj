@@ -1,0 +1,37 @@
+replicaCount: 2
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/iot/iot-data
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 121.37.0.33:8848
+- name: nacos_namespace
+  value: iot
+
+HostAliases:
+  Enable: true
+  HostAliasessAttributes:
+  - ip: "127.0.0.1"
+    hostnames:
+    - hadoop001
+  - ip: "127.0.0.1"
+    hostnames:
+    - hadoop002
+  - ip: "127.0.0.1"
+    hostnames:
+    - hadoop003
+
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []
+
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+  - name: regcred

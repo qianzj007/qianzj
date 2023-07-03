@@ -1,0 +1,15 @@
+####### 环境变量
+FrontAddress:
+- name: envLogo
+  value: dev
+- name: bpmUrl
+  value: https://spaas-view-dev.spaceplat.com
+- name: spaasUrl
+  value: https://spaas-view-dev.spaceplat.com
+BackendApiUrl:
+- name: baseUrl
+  value: https://iam-gw-dev.spaceplat.com
+- name: portalUrl
+  value: https://portal-gw-dev.spaceplat.com
+- name: uploadUrl
+  value: http://file-service.dev.svc.public.local:9902

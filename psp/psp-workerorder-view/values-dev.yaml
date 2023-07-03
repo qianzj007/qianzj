@@ -1,0 +1,44 @@
+Deployment:
+  Enabled: false
+  Ports:
+  - name: securitypcl
+    containerPort: 443
+    protocol: TCP
+  - name: registry
+    containerPort: 80
+    protocol: TCP
+
+#》》》》》》》》》》》》》》》》》》》注解：EnvironmentAnnotations ：唯一环境标识符号，代表着是哪个环境，属于那个业务线
+EnvironmentAnnotations:
+  ServiceBusinessLine: psp
+  ServiceNmae: psp-workerorder-view
+  ServiceEnvironment: sit
+service:
+  name: workorderview
+  port: 80
+EnvironmentGlobal:
+- name: baseUrl
+  value: https://psp-gw-dev.spaceplat.com
+- name: portalUrl
+  value: https://portal-gw-dev.spaceplat.com
+- name: spaasVueOrigin
+  value: https://spaas-gw-dev.spaceplat.com
+- name: spaasFormOrigin
+  value: https://spaas-gw-dev.spaceplat.com
+- name: spaasBpmOrigin
+  value: https://spaas-gw-dev.spaceplat.com
+- name: version
+  value: workorders
+- name: uploadUrl
+  value: https://iot-gwweb-dev.spaceplat.com
+- name: spaasUploadUrl
+  value: https://spaas-gw-dev.spaceplat.com
+ClusterIPService:
+  Enable: true
+  type: ClusterIP
+  ApplicationPort: 80
+  ClusterExternalPorts:
+  - portName: registry
+    protocol: TCP
+    port: 80
+    targetPort: 80

@@ -1,0 +1,60 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ubmp-workbench-view.fullname" . }}
+  labels:
+    {{- include "ubmp-workbench-view.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    {{- range .Values.service.PortScope }}
+    - port: {{ .port }}
+      targetPort: {{ .targetPort }}
+      protocol: {{ .protocol }}
+      name: {{ .portName }}
+     {{- end }}
+  selector:
+    {{- include "ubmp-workbench-view.selectorLabels" . | nindent 4 }}
+---
+{{- if .Values.service.Enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: headless-{{ include "ubmp-workbench-view.fullname" . }}
+  labels:
+    {{- include "ubmp-workbench-view.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.service.type }}
+  ports:  {{- $type := .Values.service.type -}}
+    {{- range .Values.service.PortScope }}
+    - port: {{ .port }}
+      targetPort: {{ .targetPort }}
+      protocol: {{ .protocol }}
+      name: {{ .portName }}
+      {{- if eq $type "NodePort" }}
+      nodePort: {{ .nodePort }}
+      {{- end }}
+     {{- end }}
+  selector:
+    {{- include "ubmp-workbench-view.selectorLabels" . | nindent 4 }}
+{{- end }}
+---
+{{- if .Values.serviceCompatibles.Enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: platformview
+  labels:
+    {{- include "ubmp-workbench-view.labels" . | nindent 4 }}
+spec:
+  type: ClusterIP
+  ports:
+    {{- range .Values.service.PortScope }}
+    - port: {{ .port }}
+      targetPort: {{ .targetPort }}
+      protocol: {{ .protocol }}
+      name: {{ .portName }}
+     {{- end }}
+  selector:
+    {{- include "ubmp-workbench-view.selectorLabels" . | nindent 4 }}
+{{- end }}

@@ -1,0 +1,41 @@
+
+
+replicaCount: 1
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/osms/osms-parkinfo-h5
+  pullPolicy: IfNotPresent
+  tag: ""
+
+####### 环境变量
+FrontAddress: 
+  - name: baseUrl
+    value: https://osms-gw-dev.sibeiyun.com
+  - name: portalUrl
+    value: https://portal-gw-dev.sibeiyun.com
+  - name: spaceUrl
+    value: https://portal-gw-dev.sibeiyun.com
+  - name: messageWS
+    value: https://message-channel-dev.sibeiyun.com
+  - name: spaasUrl
+    value: https://spaas-dev.sibeiyun.com
+  - name: version
+    value: osms-parkinfo-h5
+  - name: osmsUrl
+    value: https://osms-gw-dev.sibeiyun.com
+  - name: oauthUrl
+    value: https://osms-gw-dev.sibeiyun.com
+  - name: portalApiUrl
+    value: https://portal-gw-dev.sibeiyun.com
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: osms-dev.sibeiyun.com
+      paths:
+        - path: /osms-parkinfo-h5
+          pathType: ImplementationSpecific
+  tls: []

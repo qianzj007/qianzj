@@ -1,0 +1,20 @@
+GlobalAttributes:
+- name: nacos_server_addr
+  value: nacos-cs.middleware-uat.svc.spaceiot-uat.local:8848
+- name: nacos_namespace
+  value: op
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+  - host: api-gateway-uat.spaceplat.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  tls: []

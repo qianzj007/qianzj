@@ -1,0 +1,84 @@
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/iam/iam-customer
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+#################################################### 环境变量区域
+GlobalAttributes:
+- name: nacos_server_addr
+  value: iam-nacos.external.svc.cluster.local:8833
+- name: nacos_namespace
+  value: iam-prod
+- name: MysqlUrl
+  value: iam-mysql.external.svc.cluster.local
+- name: MysqlPort
+  value: "3306"
+- name: MysqlUsername
+  value: investment
+- name: MysqlPassword
+  value: TzqAbS97xis0WnQ3
+- name: RedisUrl
+  value: iam-redis.external.svc.cluster.local
+- name: RedisPort
+  value: "6379"
+- name: RedisPassword
+  value: ""
+- name: rocketmqUrl
+  value: rocketmq.external.svc.cluster.local
+- name: rocketmqPort
+  value: "9876"
+- name: ElasticsearchUrl
+  value: es.external.svc.cluster.local
+- name: ElasticsearchPort
+  value: "9200"
+- name: ElasticsearchUsername
+  value: elastic
+- name: ElasticsearchPassword
+  value: Wanzhu@sby!
+SystemInterface:
+- name: portalUrl
+  value: https://portal.spaceplat.com
+- name: portalAPIUrl
+  value: http://ubmp-gateway.external.svc.cluster.local:8078
+- name: EportalUrl
+  value: https://portal.spaceplat.com
+- name: EportalAPIUrl
+  value: https://portal-gateway.spaceplat.com
+- name: iotUrl
+  value: https://iot.spaceplat.com
+- name: iotAPIUrl
+  value: htttp://gateway-web.external.svc.cluster.local:8000
+- name: EiotUrl
+  value: https://iot.spaceplat.com
+- name: EiotAPIUrl
+  value: https://iot-gateway-web.spaceplat.com
+- name: osmsUrl
+  value: https://osms.spaceplat.com
+- name: osmsAPIUrl
+  value: http://osms-gateway.external.svc.cluster.local:8006
+- name: EosmsUrl
+  value: https://osms.spaceplat.com
+- name: EosmsAPIUrl
+  value: https://osms-gateway.spaceplat.com
+- name: spaasUrl
+  value: https://spaas.spaceplat.com
+- name: spaasAPIUrl
+  value: http://spaas-gateway.external.svc.cluster.local:9900
+- name: EspaasUrl
+  value: https://spaas.spaceplat.com
+- name: EspaasAPIUrl
+  value: https://spaas-gateway.spaceplat.com
+- name: dataReportUrl
+  value: http://data-report-sit.space.com
+- name: EdataReportUrl
+  value: https://data-report-gateway-sit.spaceplat.com
+- name: investmentUrl
+  value: https://investment.spaceplat.com
+- name: investmentAPIUrl
+  value: http://iam-gateway.external.svc.cluster.local:8101
+- name: EinvestmentUrl
+  value: https://investment.spaceplat.com
+- name: EinvestmentAPIUrl
+  value: https://investment-gateway.spaceplat.com

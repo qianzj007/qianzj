@@ -1,0 +1,32 @@
+Deployment:
+  Enabled: true
+  Ports:
+  - name: securitypcl
+    containerPort: 443
+    protocol: TCP
+  - name: registry
+    containerPort: 36025
+    protocol: TCP
+
+#》》》》》》》》》》》》》》》》》》》注解：EnvironmentAnnotations ：唯一环境标识符号，代表着是哪个环境，属于那个业务线
+EnvironmentAnnotations:
+  ServiceBusinessLine: message
+  ServiceNmae: psp-mdc-gw-app
+  ServiceEnvironment: local
+#》》》》》》》》》》》》》》》》》》》》》》》》全局环境变量：EnvironmentGlobal{{$env}} #$env：部署环境
+EnvironmentGlobal:
+- name: nacos_server_addr
+  value: 172.16.163.220:2408
+- name: nacos_namespace
+  value: psp
+- name: JAVA_HOME
+  value: java -server -Xmx768M -Xms768M -Xmn256M -XX:SurvivorRatio=4 -XX:MetaspaceSize=128M -XX:MaxMetaspaceSize=256M -XX:MaxDirectMemorySize=128M -Dfile.encoding=UTF-8 -Duser.timezone=GMT+08 -jar psp-mdc-gw-app.jar
+ClusterIPService:
+  Enable: true
+  type: ClusterIP
+  ApplicationPort: 36030
+  ClusterExternalPorts:
+  - portName: registry
+    protocol: TCP
+    port: 36030
+    targetPort: 36030

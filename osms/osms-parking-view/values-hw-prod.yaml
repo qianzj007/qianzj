@@ -1,0 +1,63 @@
+image:
+  repository: spaceicloud.tencentcloudcr.com/portal/osms-parking-view
+  pullPolicy: IfNotPresent
+  tag: ""
+
+service:
+  Enabled: false
+  type: NodePort
+  IngressPort: 80
+  PortScope:
+    - portName: registry
+      port: 80
+      targetPort: 80
+      protocol: TCP
+      nodePort: 31216
+
+####### 环境变量
+FrontAddress: 
+  - name: baseUrl
+    value: http://192.168.0.120:32000
+  - name: portalUrl
+    value: http://http://192.168.0.161:30103
+  - name: spaceUrl
+    value: http://http://192.168.0.161:30103
+  - name: messageWS
+    value: http://192.168.0.19:30211
+  - name: spaasUrl
+    value: http://192.168.0.19:30222
+  - name: version
+    value: osms-parking-view
+  - name: osmsUrl
+    value: http://192.168.0.120:32000
+
+
+### 健康检测
+HealthCheck:
+  Enabled: false
+  EetectAttributes:
+    startupProbe:
+      failureThreshold: 10
+      httpGet:
+        path: /portal/actuator/spaceHealth
+        port: registry
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 30
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /portal/actuator/spaceHealth
+        port: registry
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 30
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /portal/actuator/spaceHealth
+        port: registry
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 30

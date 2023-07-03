@@ -1,0 +1,80 @@
+eplicaCount: 1
+
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/psp/psp-workorder-h5
+  pullPolicy: IfNotPresent
+  tag: ""
+
+ImagePullSecrets:
+  Enabled: false
+  Attributes:
+    - name: regcred
+
+
+
+Nginx:
+  Enabled: true
+  ConfigurationNmae: psp-workorder-h5-configure
+  ContainersMountsAttributes:
+    - name: psp-workorder-h5-configure
+      mountPath: /etc/nginx/nginx.conf
+      subPath: nginx.conf
+  VolumesAttributes:
+    - name: psp-workorder-h5-configure
+      configMap:
+        name: psp-workorder-h5-configure
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: spaas.gemdale-st.com
+      paths:
+        - path: /psp-workorder-h5
+          pathType: ImplementationSpecific
+  tls: []
+
+Tolerations:
+  Enabled: false
+  TolerationsAttributes:
+    - key: "spaas"
+      operator: "Equal"
+      value: "true"
+      effect: "NoSchedule"
+
+
+
+
+
+####### 环境变量
+GlobalAttributes:
+  - name: baseUrl
+    value: https://psp-gw.gemdale-st.com
+  - name: portalUrl
+    value: https://portal-gw.gemdale-st.com
+  - name: spaasVueOrigin
+    value: https://spaas.gemdale-st.com
+  - name: spaasFormOrigin
+    value: https://spaas.gemdale-st.com
+  - name: spaasBpmOrigin
+    value: https://spaas.gemdale-st.com
+  - name: version
+    value: psp-workorder-h5
+  - name: uploadUrl
+    value: https://iot-gww.gemdale-st.com
+  - name: spaasUploadUrl
+    value: https://spaas-gw.gemdale-st.com
+PrefixeAddress:
+  - name: pefixe
+    value: space
+
+
+topologySpreadConstraints:
+  Enabled: false
+  Attributes:
+    maxSkew: 1
+    topologyKey: spaas
+    whenUnsatisfiable: DoNotSchedule # ScheduleAnyway：软亲和性

@@ -1,0 +1,32 @@
+Nginx:
+  Enabled: true
+  NginxConfigName: osms-parking-h5-configure
+  ContainersMountsAttributes:
+  - name: osms-parking-h5-configure
+    mountPath: /etc/nginx/nginx.conf
+    subPath: nginx.conf
+  VolumesAttributes:
+  - name: osms-parking-h5-configure
+    configMap:
+      name: osms-parking-h5-configure
+
+FrontAddress:
+- name: portalApiUrl
+  value: https://portal-gw-dev.spaceplat.com
+- name: baseUrl
+  value: https://osms-gw-dev.spaceplat.com
+- name: portalUrl
+  value: https://portal-gw-dev.spaceplat.com
+- name: spaceUrl
+  value: https://portal-gw-dev.spaceplat.com
+- name: messageWS
+  value: https://message-channel-dev.spaceplat.com
+- name: spaasUrl
+  value: https://spaas-view-dev.spaceplat.com
+- name: version
+  value: osms-parking-h5
+- name: osmsUrl
+  value: https://osms-gw-dev.spaceplat.com
+- name: payUrl
+  value: https://osms-view-dev.spaceplat.com/H5/
+

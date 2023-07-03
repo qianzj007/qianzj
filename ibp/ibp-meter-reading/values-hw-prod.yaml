@@ -1,0 +1,35 @@
+replicaCount: 1
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/ibp/ibp-meter-reading
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 172.16.162.85:8832
+- name: nacos_namespace
+  value: ibp
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+  - name: regcred
+
+HostAliases:
+  Enable: true
+  HostAliasessAttributes:
+  - ip: "127.0.0.1"
+    hostnames:
+    - hadoop001
+  - ip: "127.0.0.1"
+    hostnames:
+    - hadoop002
+  - ip: "127.0.0.1"
+    hostnames:
+    - hadoop003

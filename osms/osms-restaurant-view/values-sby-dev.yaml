@@ -1,0 +1,51 @@
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: osms-dev.sibeiyun.com
+      paths:
+        - path: /osms-restaurant-view
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+####### 环境变量
+PrefixeAddress:
+  - name: pefixe
+    value: osms-restaurant-view
+FrontAddress:
+  - name: spaasUrl
+    value: https://spaas-dev.sibeiyun.com
+BackendApi: []
+ExternalFrontAddress: []
+BackendApiUrl:
+  - name: baseUrl
+    value: https://osms-gw-dev.sibeiyun.com
+  - name: portalUrl
+    value: https://portal-gw-dev.sibeiyun.com
+  - name: spaceUrl
+    value: https://portal-gw-dev.sibeiyun.com
+  - name: messageWS
+    value: https://message-channel-dev.sibeiyun.com
+  - name: spaasUrl
+    value: https://spaas-dev.sibeiyun.com
+  - name: osmsUrl
+    value: https://osms-gw-dev.sibeiyun.com
+  - name: oauthUrl
+    value: https://osms-gw-dev.sibeiyun.com
+  - name: uploadUrl
+    value: https://iot-gwweb-dev.sibeiyun.com
+  - name: workOrderUrl
+    value: https://spaas-dev.sibeiyun.com
+  - name:  iframeUrl
+    value: https://spaas-dev.sibeiyun.com
+
+
+
+
+
+

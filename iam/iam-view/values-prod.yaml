@@ -1,0 +1,49 @@
+# Default values for iam-view.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/iam/iam-view
+  pullPolicy: IfNotPresent
+  tag: ""
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: investment.spaceplat.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+
+
+####### 环境变量
+PrefixeAddress: []
+#  - name: pefixe
+#    value: space
+SystemInterface:
+  - name: baseUrl
+    value: https://iam-gateway.spaceplat.com
+  - name: portalUrl
+    value: https://portal-gateway.spaceplat.com
+  - name: bpmUrl
+    value: https://spaas-gateway.spaceplat.com
+  - name: spaasUrl
+    value: https://spaas.spaceplat.com
+  - name: uploadUrl
+    value: http://file-upload.external.svc.cluster.local:9902
+
+
+
+
+
+

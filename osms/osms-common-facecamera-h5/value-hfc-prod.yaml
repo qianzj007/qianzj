@@ -1,0 +1,44 @@
+# Default values for osms-common-facecamera-h5.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your temes.
+
+replicaCount: 1
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/osms/osms-common-facecamera-h5
+  pullPolicy: IfNotPresent
+  tag: ""
+
+
+####### 环境变量
+FrontAddress: 
+  - name: baseUrl
+    value: http://osms-gw.hfclife.com.cn
+  - name: portalUrl
+    value: http://portal-gw.hfclife.com.cn
+  - name: spaceUrl
+    value: http://portal-gw.hfclife.com.cn
+  - name: messageWS
+    value: http://message-channel.hfclife.com.cn
+  - name: spaasUrl
+    value: http://spaas.hfclife.com.cn
+  - name: version
+    value: osms-common-facecamera-h5
+  - name: osmsUrl
+    value: http://osms-gw.hfclife.com.cn
+  - name: oauthUrl
+    value: http://osms-gw.hfclife.com.cn
+  - name: uploadUrl
+    value: http://iot-gwweb.hfclife.com.cn
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: osms.hfclife.com.cn
+      paths:
+        - path: /osms-common-facecamera-h5
+          pathType: ImplementationSpecific
+  tls: []

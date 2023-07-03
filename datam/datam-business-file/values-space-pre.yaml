@@ -1,0 +1,241 @@
+##########################################################################################################
+#                   作者：杨凯瀚
+#                   服务：datam-business-file
+#                   环境：dev
+#                   端口说明：
+#                       1. 注册端口：8960
+#                       2. 调度端口：20880
+#                       3.  nodePort: 不对外
+#                   代码仓库地址：  http://gitlab.space.com/upms/ubmp/service/space-datam-business-file.git                                                              #
+#                   nacos地址：
+#                       1. redis.yml,db-space.yml,nacos.yml,space.yml,common.yml,spaas-env.yml
+#                   域名地址： null
+#xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# 修改模块选择：
+#       1.deployment.yaml
+#       2.ingress.yaml
+#       3.service.yaml
+#
+############################################################ deployment.yaml ##########################################
+replicaCount: 1
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》  镜像定义
+image:
+  repository: spaceicloud.tencentcloudcr.com/cbb/datam-business-file
+  pullPolicy: IfNotPresent
+  tag: "latest"
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》 是否开启边车模式 skywalking?
+InitContainers:
+  Enabled: false
+  InitContainersMountsAttributes:
+  - name: sw-agent-sidecar
+    image: harbor.space.com/middleware/skywalking-agent:8.1.0
+    imagePullPolicy: IfNotPresent
+    command: ['sh']
+    args: ['-c', 'mkdir -p /skywalking/agent && cp -r /usr/skywalking/agent/* /skywalking/agent']
+    volumeMounts:
+    - mountPath: /skywalking/agent
+      name: sw-agent
+  ContainersMountsAttributes:
+  - mountPath: /usr/skywalking/agent
+    name: sw-agent
+  VolumesAttributes:
+  - name: sw-agent
+    emptyDir: {}
+# 》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》 - 是否开启镜像认证
+ImagePullSecrets:
+  Enabled: false
+  Attributes:
+  - name: dasdad
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》---  是否开启资源限制
+resources:
+  Enabled: false
+  ResourcesAttributes:
+    limits:
+      cpu: 2000m
+      memory: 1.3Gi
+    requests:
+      cpu: 500m
+      memory: 1.3Gi
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》--- 是否开启健康检查
+HealthCheck:
+  Enabled: false
+  EetectAttributes:
+    startupProbe:
+      failureThreshold: 10
+      httpGet:
+        path: /actuator/spaceHealth
+        port: registry
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 30
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /actuator/spaceHealth
+        port: registry
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 30
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /actuator/spaceHealth
+        port: registry
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 30
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》--- 是否开启污点
+Tolerations:
+  Enabled: false
+  TolerationsAttributes:
+  - key: "middleware"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》---  定义pord的端口
+Deployment:
+  Enabled: false
+  Ports:
+  - name: securitypcl
+    containerPort: 443
+    protocol: TCP
+  - name: registry
+    containerPort: 8960
+    protocol: TCP
+######################################################## service.yaml #######################
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》-- 是否开启 链路兼容
+Servicecompatible:
+  Enabled: false
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》-- 是否开启 ClusterIP 网络IP
+ClusterIPService:
+  Enable: true
+  type: ClusterIP
+  ApplicationPort: 8960
+  ClusterExternalPorts:
+  - portName: registry
+    protocol: TCP
+    port: 8960
+    targetPort: 8960
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》-- 是否开 NodePort 网络类型
+NodePortService:
+  Enable: false
+  type: NodePort
+  ClusterExternalPorts:
+  - portName: securitypcl
+    protocol: TCP
+    port: 443
+    targetPort: securitypcl
+  - portName: registry
+    protocol: TCP
+    port: 8960
+    targetPort: registry
+    nodePort: null
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》- LoadBalancer 网络类型
+LoadBalancerPortService:
+  Enable: false
+  type: LoadBalancer
+  ClusterExternalPorts:
+  - portName: encryption
+    port: 443 # 开启pod端口
+    protocol: TCP
+    targetPort: encryption # 开启pod映射到容器内部的端口:
+  - portName: registry
+    port: 8960 # 开启pod端口
+    targetPort: registry # 开启pod映射到容器内部的端口
+    protocol: TCP
+    nodePort: null
+
+
+#############################################  ingress.yaml    #######################################################
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+  - host: datam-gateway-prod.spaceplat.com
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+#    hosts:
+#      - chart-example.local
+
+
+
+########################################## 业务环境 变量 统一配置 #################
+#说明：修改变量如下：
+#  EnvironmentAnnotations
+#  EnvironmentGlobal
+#  EnvironmentSidecar
+#  EnvironmentCharacteristic
+#  EnvironmentPublic
+#  EnvironmentInterface
+#》》》》》》》》》》》》》》》》》》》注解：EnvironmentAnnotations ：唯一环境标识符号，代表着是哪个环境，属于那个业务线
+EnvironmentAnnotations:
+  ServiceBusinessLine: cbb
+  ServiceNmae: datam-business-file
+  ServiceEnvironment: local
+#》》》》》》》》》》》》》》》》》》》》》》》》全局环境变量：EnvironmentGlobal{{$env}} #$env：部署环境
+EnvironmentGlobal:
+- name: nacos_server_addr
+  value: 172.16.162.204:8848
+- name: nacos_namespace
+  value: datam
+#》》》》》》》》》》》》》》》》》》》》》》》》》边车模式环境变量：EnvironmentSidecar
+EnvironmentSidecar: []
+#  - name: JAVA_OPTS
+#    value: "-javaagent:/usr/skywalking/agent/skywalking-agent.jar"
+#  - name: SW_AGENT_COLLECTOR_BACKEND_SERVICES
+#    value: "skywalking-oap.skywalking.svc.portal.local:11800"
+#  - name: SW_AGENT_NAME
+#    value: V3-PROD
+#  - name: SW_AGENT_AUTHENTICATION
+#    value: "tsw_site@example"
+#》》》》》》》》》》》》》》》》》》》》》》 特性接口环境变量：EnvironmentCharacteristic
+EnvironmentCharacteristic: []
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》 中级间环境变量：EnvironmentPublic
+EnvironmentPublic: []
+#业务接口环境变量：EnvironmentInterface
+EnvironmentInterface: []
+
+
+
+##》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》
+###########################################################》》》》》》》》》》》》》》》》》》》》》》》
+############################## 以下变量值 丢弃 ###########################################################################
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80
+nodeSelector: {}
+affinity: {}
+nameOverride: ""
+fullnameOverride: ""
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+podAnnotations: {}
+podSecurityContext: {}
+# fsGroup: 2000
+securityContext: {}
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+#  {{- if .Values.Deployment.Enable}}
+#  {{- toYaml . | nindent 12 }}
+#  {{- end }}
+############################## 以上变量值 丢弃 ###########################################################################

@@ -1,0 +1,36 @@
+replicaCount: 1
+
+image:
+  repository: harbor.space.com/ibp/ibp-energy
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+  - name: regcred
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 10.0.200.56:9408
+- name: nacos_namespace
+  value: ibp
+
+HostAliases:
+  Enable: true
+  HostAliasessAttributes:
+  - ip: "10.0.200.14"
+    hostnames:
+    - jd-dataplat-001
+  - ip: "10.0.200.15"
+    hostnames:
+    - jd-dataplat-002
+  - ip: "10.0.200.16"
+    hostnames:
+    - jd-dataplat-003
+
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []

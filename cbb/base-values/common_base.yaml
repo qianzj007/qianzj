@@ -1,0 +1,84 @@
+GlobalAttributes:
+  - name: nacos_server_addr
+    value: nacos-cs.middleware.svc.cluster.local:8848
+  - name: nacos_namespace
+    value: prod
+  - name: MysqlUrl
+    value: 172.17.6.11
+  - name: MysqlPort
+    value: "3306"
+  - name: MysqlUsername
+    value: portal
+  - name: MysqlPassword
+    value: StzYNfftNgTz12ua
+  - name: RedisUrl
+    value: redis-haproxy.middleware.svc.cluster.local
+  - name: RedisPort
+    value: "6379"
+  - name: RedisPassword
+    value: ' '
+  - name: rocketmqUrl
+    value: 172.17.6.2
+  - name: rocketmqPort
+    value: "9876"
+  - name: ElasticsearchUrl
+    value: 172.17.6.16
+  - name: ElasticsearchPort
+    value: "9200"
+  - name: ElasticsearchUsername
+    value: elastic
+  - name: ElasticsearchPassword
+    value: Wanzhu@sby!
+FrontAddress:
+  - name: portalUrl
+    value: https://portal.spaceplat.com
+  - name: iotUrl
+    value: https://iot.spaceplat.com
+  - name: osmsUrl
+    value: https://osms.spaceplat.com
+  - name: spaasUrl
+    value: https://spaas.spaceplat.com
+  - name: dataReportUrl
+    value: http://data-report-sit.space.com
+  - name: investmentUrl
+    value: https://investment.spaceplat.com
+BackendApiUrl:
+  - name: portalAPIUrl
+    value: http://172.17.3.2:8078
+  - name: iotAPIUrl
+    value: https://172.17.4.13:8000
+  - name: osmsAPIUrl
+    value: http://172.17.8.7:30007
+  - name: spaasAPIUrl
+    value: http://172.17.5.9:9900
+  - name: dataReportAPIUrl
+    value: http://data-report-gateway-sit.space.com
+  - name: investmentAPIUrl
+    value: http://172.17.0.7:8101
+# 生产、sim、uat环境接口地址
+ExternalFrontAddress:
+  - name: EportalUrl
+    value: https://portal.spaceplat.com
+  - name: EiotUrl
+    value: https://iot.spaceplat.com
+  - name: EosmsUrl
+    value: https://osms.spaceplat.com
+  - name: EspaasUrl
+    value: https://spaas.spaceplat.com
+  - name: EdataReportUrl
+    value: https://data-report-sit.spaceplat.com
+  - name: EinvestmentUrl
+    value: https://investment.spaceplat.com
+ExternalBackendApiUrl:
+  - name: EportalAPIUrl
+    value: https://portal-gateway.spaceplat.com
+  - name: EiotAPIUrl
+    value: https://iot-gateway-web.spaceplat.com
+  - name: EosmsAPIUrl
+    value: https://osms-gateway.spaceplat.com
+  - name: EspaasAPIUrl
+    value: https://spaas-gateway.spaceplat.com
+  - name: EdataReportAPIUrl
+    value: https://data-report-gateway-sit.spaceplat.com
+  - name: EinvestmentAPIUrl
+    value: https://investment-gateway.spaceplat.com

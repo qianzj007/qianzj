@@ -1,0 +1,127 @@
+GlobalAttributes:
+  - name: nacos_server_addr
+    value: nacos-hs.middleware-test.svc.spaceiot.local:8848
+  - name: nacos_namespace
+    value: hmi
+  - name: MysqlUrl
+    value: "172.16.163.118"
+  - name: MysqlPort
+    value: "3317"
+  - name: MysqlUsername
+    value: root
+  - name: MysqlPassword
+    value: vtunf9iHZfkf9D_3JzzZ
+  - name: RedisUrl
+    value: ibp-redis-headless.middleware-test.svc.spaceiot.local
+  - name: RedisPort
+    value: "6379"
+  - name: RedisPassword
+    value: MWYyZDFlMmU2N2Rm
+  - name: rocketmqUrl
+    value: test-mq.space.com
+  - name: rocketmqPort
+    value: "9876"
+  - name: ElasticsearchUrl
+    value: elasticsearch-master.middleware-test.svc.public.local
+  - name: ElasticsearchPort
+    value: "9200"
+  - name: ElasticsearchUsername
+    value: "elastic"
+  - name: ElasticsearchPassword
+    value: "Wanzhu@sby!"
+  - name: CassandraUrl
+    value: "172.16.163.52"
+  - name: CassandraPort
+    value: "9042"
+  - name: CloudEdgeMqNameServer
+    value: test-mq.space.com:9876
+  - name: CloudEdgeMqGroup
+    value: cloud-edge-proxy-prodcuer-group
+  - name: CloudEdgeMqTopic
+    value: edge_belong_system_door_control
+  - name: CloudEdgeSpaceUrl
+    value: http://gateway-web.test.svc.spaceiot.local:8000
+  - name: CloudEdgePropertyUrl
+    value: http://osms-gateway-test.space.com
+  - name: CloudEdgeIotUrl
+    value: http://gateway-web.test.svc.spaceiot.local:8000
+  - name: CloudEdgeTenementCode
+    value: ZH_00098
+  - name: CloudEdgeProjectCode
+    value: ZH_00098_XM_00000001
+FrontAddress:
+  # 门户内网前端地址
+  - name: portalUrl
+    value: "https://portal-test.space.com"
+  # 门户内网网关地址
+  - name: portalAPIUrl
+    value: "http://portal-gateway-test.space.com"
+  # 门户外网前端地址
+  - name: EportalUrl
+    value: "https://portal-test.spaceplat.com"
+  # 门户外网网关地址
+  - name: EportalAPIUrl
+    value: "https://portal-test.spaceplat.com"
+  # 物联网内网前端地址
+  - name: iotUrl
+    value: "https://spaceiot-test.space.com"
+  # 物联网内网网关地址
+  - name: iotAPIUrl
+    value: "https://iot-gateway-web-test.space.com"
+  # 物联网外网前端地址
+  - name: EiotUrl
+    value: "https://spaceiot-test.spaceplat.com"
+  # 物联网外网网关地址
+  - name: EiotAPIUrl
+    value: "https://iot-gateway-web-test.spaceplat.com"
+  # 运营内网前端地址
+  - name: osmsUrl
+    value: "http://osms-test.space.com"
+  # 运营内网网关地址
+  - name: osmsAPIUrl
+    value: "http://osms-gateway-test.space.com"
+  # 运营外网前端地址
+  - name: EosmsUrl
+    value: "https://osms-test.spaceplat.com"
+  # 运营外网网关地址
+  - name: EosmsAPIUrl
+    value: "https://osms-test.spaceplat.com"
+  # spaas内网前端地址
+  - name: spaasUrl
+    value: "http://spaas-test.space.com"
+  # spaas内网网关地址
+  - name: spaasAPIUrl
+    value: "http://spaas-gateway-test.space.com"
+  # spaas外网前端地址
+  - name: EspaasUrl
+    value: "https://spaas-test.spaceplat.com"
+  # spaas外网网关地址
+  - name: EspaasAPIUrl
+    value: "https://spaas-gateway-test.spaceplat.com"
+  # 大数据内网前端地址
+  - name: dataReportUrl
+    value: "http://data-report-test.space.com"
+  # 大数据内网网关地址
+  - name: dataReportUrl
+    value: "http://data-report-gateway-test.space.com"
+  # 大数据外网前端地址
+  - name: EdataReportUrl
+    value: "https://data-report-test.spaceplat.com"
+  # 大数据外网网关地址
+  - name: EdataReportUrl
+    value: "https://data-report-gateway-test.spaceplat.com"
+  # 招商内网前端地址
+  - name: investmentUrl
+    value: "http://investment-test.space.com"
+  # 招商内网网关地址
+  - name: investmentAPIUrl
+    value: "http://investment-gateway-test.space.com"
+  # 招商外网前端地址
+  - name: EinvestmentUrl
+    value: "https://investment-test.spaceplat.com"
+  # 招商外网网关地址
+  - name: EinvestmentAPIUrl
+    value: "https://investment-gateway-test.spaceplat.com"
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []

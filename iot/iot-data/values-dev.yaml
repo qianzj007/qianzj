@@ -1,0 +1,23 @@
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 172.16.163.220:5408
+- name: nacos_namespace
+  value: iot
+HostAliases:
+  Enable: true
+  HostAliasessAttributes:
+  - ip: "10.17.14.6"
+    hostnames:
+    - hadoop001
+  - ip: "10.17.14.11"
+    hostnames:
+    - hadoop002
+  - ip: "10.17.14.17"
+    hostnames:
+    - hadoop003
+  - ip: "10.17.14.9"
+    hostnames:
+    - hadoop004
+  - ip: "10.17.14.4"
+    hostnames:
+    - hadoop005

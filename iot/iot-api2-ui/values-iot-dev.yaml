@@ -1,0 +1,24 @@
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: iot-dev.space.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+        - path: /parking-lot
+          pathType: ImplementationSpecific
+        - path: /player
+          pathType: ImplementationSpecific
+        - path: /opreation-report
+          pathType: ImplementationSpecific
+  tls: []
+
+
+
+
+####### 环境变量
+FrontAddress: []
+BackendApiUrl: []

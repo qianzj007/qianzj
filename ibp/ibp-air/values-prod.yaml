@@ -1,0 +1,17 @@
+replicaCount: 2
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/ibp/ibp-air
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: iot-nacos.external.svc.cluster.local:8832
+- name: nacos_namespace
+  value: ibp-prod
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []

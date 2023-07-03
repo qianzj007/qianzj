@@ -1,0 +1,63 @@
+replicaCount: 1
+
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/iot/iot-view
+  pullPolicy: IfNotPresent
+  tag: ""
+
+
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: iot.lenovo.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+        - path: /parking-lot
+          pathType: ImplementationSpecific
+        - path: /player
+          pathType: ImplementationSpecific
+        - path: /opreation-report
+          pathType: ImplementationSpecific
+  tls: []
+
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+    - name: regcred
+
+
+####### 环境变量
+FrontAddress:
+  - name: envLogo
+    value: lenovo-prod
+  - name: spaasFlowUrl
+    value: //spaas.lenovo.com/bpm-designer/
+BackendApiUrl:
+  - name: portalUrl
+    value: http://121.37.0.33:30103
+  - name: baseUrl
+    value: http://121.37.0.33:32100
+  - name: ibpUrl
+    value: http://121.37.0.33:32101
+  - name: iframeUrl
+    value: http://121.37.0.33:32800
+  - name: messageUrl
+    value: http://121.37.0.33:30208
+  - name: messageWs
+    value: http://121.37.0.33:30211
+  - name: uploadUrl
+    value: http://121.37.0.33:32100
+  - name: vedioUrl
+    value: http://121.37.0.33:32100
+  - name: spaceUrl
+    value: http://121.37.0.33:30103/space/v1
+  - name: workOrderUrl
+    value: http://121.37.0.33:32800
+  - name: parkingUrl
+    value: http://121.37.0.33:32101

@@ -1,0 +1,22 @@
+replicaCount: 1
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/iot/iot-edge-adapter
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 121.37.0.33:8848
+- name: nacos_namespace
+  value: space-gateway-operation-platform
+FrontAddress: []
+BackendApiUrl: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl: []
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+  - name: regcred

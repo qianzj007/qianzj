@@ -1,0 +1,48 @@
+# Default values for dp-datawarehouse-view.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: harbor.space.com/dp/dp-datawarehouse-view
+  pullPolicy: IfNotPresent
+  tag: ""
+
+ImagePullSecrets:
+  Enabled: false
+  Attributes:
+    - name: regcred
+service:
+  Enabled: false
+  type: NodePort
+  IngressPort: 80
+  PortScope:
+    - portName: registry
+      port: 80
+      targetPort: registry
+      protocol: TCP
+      nodePort: 300106
+
+Nginx:
+  Enabled: true
+  ConfigurationNmae: dp-datawarehouse-view-configure
+  ContainersMountsAttributes:
+    - name: dp-datawarehouse-view-configure
+      mountPath: /etc/nginx/nginx.conf
+      subPath: nginx.conf
+  VolumesAttributes:
+    - name: dp-datawarehouse-view-configure
+      configMap:
+        name: dp-datawarehouse-view-configure
+serviceCompatibles:
+  Enabled: false
+####### 环境变量
+FrontAddress: []
+BackendApi: []
+ExternalFrontAddress: []
+ExternalBackendApiUrl:
+  - name: baseUrl
+    value: https://data-report.spaceplat.com
+  - name: portalUrl
+    value: https://portal-gateway.spaceplat.com

@@ -1,0 +1,28 @@
+
+Nginx:
+  Enabled: true
+  NginxConfigName: osms-door-view-configure
+  ContainersMountsAttributes:
+  - name: osms-door-view-configure
+    mountPath: /etc/nginx/nginx.conf
+    subPath: nginx.conf
+  VolumesAttributes:
+  - name: osms-door-view-configure
+    configMap:
+      name: osms-door-view-configure
+####### 环境变量
+FrontAddress:
+- name: baseUrl
+  value: https://osms-gw-dev.spaceplat.com
+- name: portalUrl
+  value: https://portal-gw-dev.spaceplat.com
+- name: spaceUrl
+  value: https://portal-gw-dev.spaceplat.com
+- name: messageWS
+  value: https://message-channel-dev.spaceplat.com
+- name: spaasUrl
+  value: https://spaas-view-dev.spaceplat.com
+- name: osmsUrl
+  value: https://osms-gw-dev.spaceplat.com
+- name: iamUrl
+  value: https://iam-gw-dev.spaceplat.com

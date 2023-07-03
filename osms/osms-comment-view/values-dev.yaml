@@ -1,0 +1,28 @@
+Nginx:
+  Enabled: true
+  NginxConfigName: osms-comment-view-configure
+  ContainersMountsAttributes:
+  - name: osms-comment-view-configure
+    mountPath: /etc/nginx/nginx.conf
+    subPath: nginx.conf
+  VolumesAttributes:
+  - name: osms-comment-view-configure
+    configMap:
+      name: osms-comment-view-configure
+
+####### 环境变量
+FrontAddress:
+- name: baseUrl
+  value: https://osms-gw-dev.spaceplat.com
+- name: portalUrl
+  value: https://portal-gw-dev.spaceplat.com
+- name: spaceUrl
+  value: https://portal-gw-dev.spaceplat.com
+- name: messageWS
+  value: https://message-channel-dev.spaceplat.com
+- name: spaasUrl
+  value: https://spaas-view-dev.spaceplat.com
+- name: version
+  value: comment-view
+- name: osmsUrl
+  value: https://osms-gw-dev.spaceplat.com

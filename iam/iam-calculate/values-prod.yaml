@@ -1,0 +1,271 @@
+# Default values for iam-calculate.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/iam/iam-business
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+service:
+  Enabled: true
+  type: NodePort
+  IngressPort: 8103
+  PortScope:
+  - portName: registry
+    port: 8103
+    targetPort: registry
+    protocol: TCP
+    nodePort: 30283
+
+
+####### 环境变量
+
+GlobalAttributes:
+- name: nacos_server_addr
+  value: iam-nacos.external.svc.cluster.local:8833
+- name: nacos_namespace
+  value: iam-prod
+- name: MysqlUrl
+  value: iam-mysql.external.svc.cluster.local
+- name: MysqlPort
+  value: "3306"
+- name: MysqlUsername
+  value: investment
+- name: MysqlPassword
+  value: TzqAbS97xis0WnQ3
+- name: RedisUrl
+  value: iam-redis.external.svc.cluster.local
+- name: RedisPort
+  value: "6379"
+- name: RedisPassword
+  value: ""
+- name: rocketmqUrl
+  value: rocketmq.external.svc.cluster.local
+- name: rocketmqPort
+  value: "9876"
+- name: ElasticsearchUrl
+  value: es.external.svc.cluster.local
+- name: ElasticsearchPort
+  value: "9200"
+- name: ElasticsearchUsername
+  value: elastic
+- name: ElasticsearchPassword
+  value: Wanzhu@sby!
+- name: portalUrl
+  value: https://portal.spaceplat.com
+- name: portalAPIUrl
+  value: http://ubmp-gateway.external.svc.cluster.local:8078
+- name: EportalUrl
+  value: https://portal.spaceplat.com
+- name: EportalAPIUrl
+  value: https://portal-gateway.spaceplat.com
+- name: iotUrl
+  value: https://iot.spaceplat.com
+- name: iotAPIUrl
+  value: htttp://gateway-web.external.svc.cluster.local:8000
+- name: EiotUrl
+  value: https://iot.spaceplat.com
+- name: EiotAPIUrl
+  value: https://iot-gateway-web.spaceplat.com
+- name: osmsUrl
+  value: https://osms.spaceplat.com
+- name: osmsAPIUrl
+  value: http://osms-gateway.external.svc.cluster.local:8006
+- name: EosmsUrl
+  value: https://osms.spaceplat.com
+- name: EosmsAPIUrl
+  value: https://osms-gateway.spaceplat.com
+- name: spaasUrl
+  value: https://spaas.spaceplat.com
+- name: spaasAPIUrl
+  value: http://spaas-gateway.external.svc.cluster.local:9900
+- name: EspaasUrl
+  value: https://spaas.spaceplat.com
+- name: EspaasAPIUrl
+  value: https://spaas-gateway.spaceplat.com
+- name: dataReportUrl
+  value: http://data-report-sit.space.com
+- name: EdataReportUrl
+  value: https://data-report-gateway-sit.spaceplat.com
+- name: investmentUrl
+  value: https://investment.spaceplat.com
+- name: investmentAPIUrl
+  value: http://iam-gateway.external.svc.cluster.local:8101
+- name: EinvestmentUrl
+  value: https://investment.spaceplat.com
+- name: EinvestmentAPIUrl
+  value: https://investment-gateway.spaceplat.com
+
+
+
+
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    # kubernetes.io/tls-acme: "true"
+  hosts:
+  - host: chart-example.local
+    paths:
+    - path: /
+      pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+#    hosts:
+#      - chart-example.local
+
+#污点兼容
+Tolerations:
+  Enabled: false
+  TolerationsAttributes:
+  - key: "iam"
+    operator: "Equal"
+    value: "true"
+    effect: "NoSchedule"
+
+
+
+# 均衡调度
+topologySpreadConstraints:
+  Enabled: true
+  Attributes:
+    maxSkew: 1
+    topologyKey: kubernetes.io/hostname
+    whenUnsatisfiable: DoNotSchedule # ScheduleAnyway：软亲和性
+
+
+
+
+
+resources:
+  Enabled: false
+  ResourcesAttributes:
+    limits:
+      cpu: 2000m
+      memory: 1.3Gi
+    requests:
+      cpu: 500m
+      memory: 1.3Gi
+
+
+
+
+NodeSelector:
+  Enabled: false
+  Attributes:
+    kubernetes.io/hostname: kdev-control-163.230
+
+
+
+
+
+HealthCheck:
+  Enabled: false
+  EetectAttributes:
+    startupProbe:
+      failureThreshold: 10
+      httpGet:
+        path: /portal/actuator/spaceHealth
+        port: registry
+      initialDelaySeconds: 60
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 30
+    livenessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /portal/actuator/spaceHealth
+        port: registry
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 30
+    readinessProbe:
+      failureThreshold: 3
+      httpGet:
+        path: /portal/actuator/spaceHealth
+        port: registry
+      periodSeconds: 10
+      successThreshold: 1
+      timeoutSeconds: 30
+################## 以下配置很少改动
+### 持久化存储
+
+ResourceVolumes: #定义资源属性挂载
+  Enabled: false
+  # pvc持久化存储方式
+  ersistentVolumeClaim:
+    Name: storage-nfs # 全局替换此处的名称即可
+    storageClassName: nfs-client
+  ResourceVolumesAttributes: #定义pvc的名称
+  - name: storage-nfs
+    persistentVolumeClaim: #指定pvc
+      claimName: backend-nfs
+  ResourceVolumesMountPathAttributes: ## 指定挂载到容器内部的路径
+  - name: storage-nfs
+    mountPath: /data/
+# hostpath 持久化存储方式
+Privatization: #定义资源属性挂载
+  Enabled: false
+  PrivateCloudAttributes:
+  - name: cloudEnv
+    value: PublicCloud
+  LicenseAttributesvolumeMounts: #hostpat目录
+  - name: license-certificate
+    mountPath: /portal/license
+  LicenseAttributesVolumes: ## 指定挂载到容器内部的路径
+  - name: license-certificate
+    hostPath:
+      path: /portal/backend
+      type: DirectoryOrCreate
+
+strategy:
+  enabled: true
+  type: RollingUpdate
+  rollingUpdate:
+    maxSurge: 2
+    maxUnavailable: 0
+
+lifecycle:
+  Enabled: false
+  lifecycleAttributes:
+    lifecycle:
+      preStop:
+        exec:
+          command: ["/bin/sh", "-c", "nginx -s quit; while killall -0 nginx; do sleep 1; done"]
+
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: false
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+affinity: {}
+podAnnotations: {}
+
+podSecurityContext: {}
+# fsGroup: 2000
+
+securityContext: {}
+# capabilities:
+#   drop:
+#   - ALL
+# readOnlyRootFilesystem: true
+# runAsNonRoot: true
+# runAsUser: 1000
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  # targetMemoryUtilizationPercentage: 80

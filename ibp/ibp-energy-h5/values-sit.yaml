@@ -1,0 +1,35 @@
+replicaCount: 1
+
+image:
+  repository: harbor-state.space.com/ibp/ibp-energy-h5
+  pullPolicy: IfNotPresent
+  tag: ""
+
+####### 环境变量
+FrontAddress: []
+BackendApiUrl:
+  - name: portalUrl
+    value: https://portal-gateway-sit.spaceplat.com
+  - name: commonUrl
+    value: https://iot-gateway-web-sit.spaceplat.com
+  - name: ibpUrl
+    value: https://ibp-gateway-app-sit.spaceplat.com
+  - name: ibpWebUrl
+    value: https://ibp-gateway-web-sit.spaceplat.com
+
+
+
+
+
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: spaceiot-sit.spaceplat.com
+      paths:
+        - path: /energy-h5
+          pathType: ImplementationSpecific
+  tls: []

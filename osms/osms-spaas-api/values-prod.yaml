@@ -1,0 +1,110 @@
+image:
+  repository: spaceicloud.tencentcloudcr.com/osms/osms-spaas-api
+  pullPolicy: IfNotPresent
+
+service:
+  Enabled: false
+  type: NodePort
+  IngressPort: 8024
+  PortScope:
+  - portName: registry
+    port: 8024
+    targetPort: registry
+    protocol: TCP
+    nodePort: 32016
+
+#################################################### 环境变量区域
+GlobalAttributes:
+- name: nacos_server_addr
+  value: osms-nacos.external.svc.cluster.local:8833
+- name: nacos_namespace
+  value: prod
+- name: MysqlOSMSUrl
+  value: public-mysql.external.svc.cluster.local
+- name: MysqlOSMSPort
+  value: "3306"
+- name: MysqlOSMSUsername
+  value: spaas
+- name: MysqlOSMSPassword
+  value: h@K7gSa@aILPkfIV
+- name: MysqlSpaasUrl
+  value: public-mysql.external.svc.cluster.local
+- name: MysqlSpaasPort
+  value: "3306"
+- name: MysqlSpaasUsername
+  value: spaas
+- name: MysqlSpaasPassword
+  value: h@K7gSa@aILPkfIV
+- name: RedisUrl
+  value: osms-redis.external.svc.cluster.local
+- name: RedisPort
+  value: "6379"
+- name: RedisPassword
+  value: ' '
+- name: ElasticsearchUrl
+  value: es.external.svc.cluster.local
+- name: ElasticsearchPort
+  value: "9200"
+- name: ElasticsearchUsername
+  value: elastic
+- name: ElasticsearchPassword
+  value: Wanzhu@sby!
+- name: rocketmqUrl
+  value: rocketmq.external.svc.cluster.local
+- name: rocketmqPort
+  value: "9876"
+FrotAddress:
+- name: portalUrl
+  value: https://portal.spaceplat.com
+- name: spaasUrl
+  value: https://spaas.spaceplat.com
+- name: osmsUrl
+  value: https://osms.spaceplat.com
+- name: dataReportUrl
+  value: http://data-report-gateway-sit.space.com
+- name: investmentUrl
+  value: https://investment.spaceplat.com
+
+BackendApiUrl:
+- name: portalAPIUrl
+  value: http://172.17.3.2:8078
+- name: spaasAPIUrl
+  value: http://172.17.5.9:9900
+- name: iotAPIUrl
+  value: https://172.17.4.13:8000
+- name: osmsAPIUrl
+  value: http://172.17.8.7:30007
+- name: investmentAPIUrl
+  value: http://172.17.0.7:8101
+
+ExternalFrontAddress:
+- name: iotUrl
+  value: https://iot.spaceplat.com
+- name: EiotUrl
+  value: https://iot.spaceplat.com
+- name: EosmsUrl
+  value: https://osms.spaceplat.com
+- name: EspaasUrl
+  value: https://spaas.spaceplat.com
+- name: EdataReportUrl
+  value: https://data-report-sit.spaceplat.com
+- name: EinvestmentUrl
+  value: https://investment.spaceplat.com
+- name: EportalUrl
+  value: https://portal.spaceplat.com
+
+ExternalBackendApiUrl:
+- name: EiotAPIUrl
+  value: https://iot-gateway-web.spaceplat.com
+- name: EportalAPIUrl
+  value: https://portal-gateway.spaceplat.com
+- name: EosmsAPIUrl
+  value: https://osms-gateway.spaceplat.com
+- name: EspaasAPIUrl
+  value: https://spaas-gateway.spaceplat.com
+- name: EinvestmentAPIUrl
+  value: https://investment-gateway.spaceplat.com
+
+######################################################################
+
+

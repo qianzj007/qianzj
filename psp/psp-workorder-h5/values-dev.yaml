@@ -1,0 +1,18 @@
+
+GlobalAttributes:
+- name: baseUrl
+  value: https://psp-gw-dev.spaceplat.com
+- name: portalUrl
+  value: https://portal-gw-dev.spaceplat.com
+- name: spaasVueOrigin
+  value: https://spaas-view-dev.spaceplat.com
+- name: spaasFormOrigin
+  value: https://spaas-view-dev.spaceplat.com
+- name: spaasBpmOrigin
+  value: https://spaas-view-dev.spaceplat.com
+- name: version
+  value: psp-workorder-h5
+- name: uploadUrl
+  value: https:/iot-gwweb-dev.spaceplat.com
+- name: spaasUploadUrl
+  value: https://spaas-gw-dev.spaceplat.com

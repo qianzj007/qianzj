@@ -1,0 +1,59 @@
+image:
+  repository: spaceicloud.tencentcloudcr.com/osms/osms-restaurant-h5
+  pullPolicy: IfNotPresent
+  tag: ""
+service:
+  Enabled: false
+  type: NodePort
+  IngressPort: 80
+  PortScope:
+    - portName: registry
+      port: 80
+      targetPort: 80
+      protocol: TCP
+      nodePort: 31216
+
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: osms-osms.spaceplat.com
+      paths:
+        - path: /restaurant-h5
+          pathType: ImplementationSpecific
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+####### 环境变量
+PrefixeAddress:
+  - name: pefixe
+    value: restaurant-h5
+FrontAddress:
+  - name: spaasUrl
+    value: http://192.168.0.19:30222
+BackendApi: []
+#ExternalFrontAddress: []
+#ExternalBackendApiUrl:
+  - name: baseUrl
+    value: https://osms-gateway-osms.spaceplat.com
+  - name: portalUrl
+    value: http://http://192.168.0.161:30103
+  - name: spaceUrl
+    value: http://http://192.168.0.161:30103
+  - name: messageWS
+    value: http://192.168.0.19:30211
+  - name: osmsUrl
+    value: https://osms-gateway-osms.spaceplat.com
+
+
+
+
+
+
+
+

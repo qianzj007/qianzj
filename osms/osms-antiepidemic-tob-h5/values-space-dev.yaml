@@ -1,0 +1,35 @@
+image:
+  repository: harbor.space.com/osms/osms-antiepidemic-tob-h5
+  pullPolicy: IfNotPresent
+  tag: ""
+
+
+service:
+  Enabled: false
+  type: NodePort
+  IngressPort: 80
+  PortScope:
+  - portName: registry
+    port: 80
+    targetPort: 80
+    protocol: TCP
+    nodePort: 31216
+
+####### 环境变量
+FrontAddress:
+- name: version
+  value: antiepidemic-tob-h5
+- name: baseUrl
+  value: https://lenovo-osms-gw.spaceplat.com
+- name: portalUrl
+  value: https://lenovo-portal-gw.spaceplat.com
+- name: spaceUrl
+  value: https://lenovo-portal-gw.spaceplat.com
+- name: messageWS
+  value: https://lenovo-psp-gw.spaceplat.com
+- name: spaasUrl
+  value: https://lenovo-spaas.spaceplat.com
+- name: osmsUrl
+  value: https://lenovo-osms-gw.spaceplat.com
+- name: oauthUrl
+  value: https://lenovo-osms-gw.spaceplat.com

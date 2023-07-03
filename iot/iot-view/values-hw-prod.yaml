@@ -1,0 +1,65 @@
+replicaCount: 1
+
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/iot/iot-view
+  pullPolicy: IfNotPresent
+  tag: ""
+
+
+ingress:
+  enabled: false
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: iot.lenovo.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+        - path: /parking-lot
+          pathType: ImplementationSpecific
+        - path: /player
+          pathType: ImplementationSpecific
+        - path: /opreation-report
+          pathType: ImplementationSpecific
+  tls: []
+
+
+ImagePullSecrets:
+  Enabled: true
+  Attributes:
+    - name: regcred
+
+
+####### 环境变量
+FrontAddress:
+  - name: envLogo
+    value: lenovo-prod
+  - name: spaasFlowUrl
+    value: //hw-spaas.spaceplat.com/bpm-designer/
+BackendApiUrl:
+  - name: datacenterUrl
+    value: 
+  - name: portalUrl
+    value: https://hw-portal-gw.spaceplat.com
+  - name: baseUrl
+    value: https://hw-iot-gwweb.spaceplat.com
+  - name: ibpUrl
+    value: https://hw-ibp-gwweb.spaceplat.com
+  - name: iframeUrl
+    value: https://hw-spaas.spaceplat.com
+  - name: messageUrl
+    value: https://hw-psp-gw.spaceplat.com
+  - name: messageWs
+    value: https://hw-message-channel.spaceplat.com
+  - name: uploadUrl
+    value: https://hw-iot-gwweb.spaceplat.com
+  - name: vedioUrl
+    value: https://hw-iot-gwweb.spaceplat.com
+  - name: spaceUrl
+    value: https://hw-portal-gw.spaceplat.com/space/v1
+  - name: workOrderUrl
+    value: https://hw-spaas.spaceplat.com
+  - name: parkingUrl
+    value: https://hw-ibp-gwweb.spaceplat.com

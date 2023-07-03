@@ -1,0 +1,5 @@
+####### 环境变量
+FrontAddress:
+- name: baseUrl
+  value: https://api-manage-dev.spaceplat.com
+BackendApiUrl: []

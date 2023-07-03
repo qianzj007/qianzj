@@ -1,0 +1,22 @@
+
+#》》》》》》》》》》》》》》》》》》》注解：EnvironmentAnnotations ：唯一环境标识符号，代表着是哪个环境，属于那个业务线
+EnvironmentAnnotations:
+  ServiceBusinessLine: spaas
+  ServiceNmae: spaas-user
+  ServiceEnvironment: local
+#》》》》》》》》》》》》》》》》》》》》》》》》全局环境变量：EnvironmentGlobal{{$env}} #$env：部署环境
+EnvironmentGlobal:
+- name: nacos_server_addr
+  value: 172.16.163.220:2408
+- name: nacos_namespace
+  value: spaas
+
+Deployment:
+  Enabled: false
+  Ports:
+  - name: securitypcl
+    containerPort: 443
+    protocol: TCP
+  - name: registry
+    containerPort: 7000
+    protocol: TCP

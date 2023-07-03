@@ -1,0 +1,13 @@
+image:
+  repository: spaceicloud.tencentcloudcr.com/osms/osms-location-rule
+  pullPolicy: IfNotPresent
+
+#################################################### 环境变量区域
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 192.168.32.242:9408
+- name: nacos_namespace
+  value: osms
+  ######################################################################
+
+

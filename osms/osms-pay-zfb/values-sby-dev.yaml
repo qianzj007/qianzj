@@ -1,0 +1,17 @@
+replicaCount: 1
+
+image:
+  repository: spaceicloud.tencentcloudcr.com/osms/osms-pay-zfb
+  pullPolicy: IfNotPresent
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+#################################################### 环境变量区域
+JavaAttributes:
+  - name: JAVA_HOME
+    value: "java -Xms512m -Xmx512m -Dfile.encoding=UTF-8 -Duser.timezone=GMT+08 -jar osms-pay-zfb.jar"
+GlobalAttributes:
+  - name: nacos_server_addr
+    value: nacos-cs.middleware.svc.dev.local:8848
+  - name: nacos_namespace
+    value: osms-dev

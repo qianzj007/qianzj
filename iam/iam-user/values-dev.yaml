@@ -1,0 +1,10 @@
+#################################################### 环境变量区域
+GlobalAttributes:
+- name: nacos_server_addr
+  value: 172.16.163.220:9408
+- name: nacos_namespace
+  value: iam
+
+
+
+

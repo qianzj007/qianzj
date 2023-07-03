@@ -1,0 +1,37 @@
+
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》---  定义pord的端口
+Deployment:
+  Enabled: false
+  Ports:
+  - name: securitypcl
+    containerPort: 443
+    protocol: TCP
+  - name: registry
+    containerPort: 80
+    protocol: TCP
+    ######################################################## service.yaml #######################
+
+#》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》》-- 是否开启 ClusterIP 网络IP
+ClusterIPService:
+  Enable: true
+  type: ClusterIP
+  ApplicationPort: 8520
+  ClusterExternalPorts:
+  - portName: securitypcl
+    port: 443
+    protocol: TCP
+    targetPort: securitypcl
+  - portName: schedule
+    port: 18520
+    targetPort: 18520
+    protocol: TCP
+  - portName: registry
+    protocol: TCP
+    port: 8520
+    targetPort: 8520
+#》》》》》》》》》》》》》》》》》》》》》》》》全局环境变量：EnvironmentGlobal{{$env}} #$env：部署环境
+EnvironmentGlobal:
+- name: nacos_server_addr
+  value: 172.16.163.220:5408
+- name: nacos_namespace
+  value: pms

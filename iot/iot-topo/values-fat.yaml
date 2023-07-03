@@ -1,0 +1,46 @@
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: topo-fat.space.com
+      paths:
+        - path: /
+          pathType: ImplementationSpecific
+  tls: []
+
+
+####### 环境变量
+FrontAddress: []
+BackendApiUrl:
+  - name: envLogo
+    value: lenovo-prod
+  - name: portalUrl
+    value: http://portal-gateway-idev.space.com
+  - name: SOCKET_URL
+    value: ws://iot-hmi-mq.fat.svc.spaceiot.local:7080/manager/mq/datawebsocket
+  - name: BASE_URL
+    value: http://iot-hmi-manager.fat.svc.spaceiot.local:7070
+  - name: PASE_INFO_URL
+    value: http://iot-topo.fat.svc.spaceiot.local
+  - name: PASE_INFO_BASE_URL
+    value: http://portal-gateway-idev.space.com/portal/v1
+  - name: IS_NEW_PLATEFORM
+    value: "1"
+  - name: SOCKET_LOCK_URL
+    value: ws://iot-hmi-manager.fat.svc.spaceiot.local:7070/manager/hmi/datawebsocket
+  - name: IOT_URL
+    value: http://gateway-web.fat.svc.spaceiot.local:8000
+  - name: IBP_URL
+    value: http://ibp-gateway-web.fat.svc.spaceiot.local:8000
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,50 @@
+image:
+  repository: spaceicloud.tencentcloudcr.com/ibp/door
+  pullPolicy: IfNotPresent
+  tag: ""
+
+
+####### 环境变量
+FrontAddress:
+  - name: iframeUrl
+    value: ttp://121.37.0.33:30218
+  - name: messageUrl
+    value: ttp://121.37.0.33:30218
+BackendApiUrl:
+  - name: portalUrl
+    value: ttp://121.37.0.33:30103
+  - name: baseUrl
+    value: http://121.37.0.33:32100
+  - name: ibpUrl
+    value: http://121.37.0.33:32101
+  - name: messageWs
+    value: ttp://121.37.0.33:30211
+  - name: uploadUrl
+    value: http://121.37.0.33:32100
+  - name: vedioUrl
+    value: http://121.37.0.33:32100
+  - name: spaceUrl
+    value: ttp://121.37.0.33:30103/space/v1
+  - name: workOrderUrl
+    value: ttp://121.37.0.33:32800
+  - name: parkingUrl
+    value: http://121.37.0.33:32101
+  - name: spaasFlowUrl
+    value: http://121.37.0.33:32800/bpm-designer/
+
+
+
+
+ingress:
+  enabled: true
+  className: ""
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  hosts:
+    - host: iot.spaceplat.com
+      paths:
+        - path: /door
+          pathType: ImplementationSpecific
+  tls: []
+
+

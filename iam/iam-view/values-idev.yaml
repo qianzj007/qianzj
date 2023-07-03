@@ -1,0 +1,15 @@
+####### 环境变量
+PrefixeAddress: []
+#  - name: pefixe
+#    value: space
+SystemInterface:
+  - name: baseUrl
+    value: http://iam-gateway-idev.space.com
+  - name: portalUrl
+    value: http://portal-gateway-idev.space.com
+  - name: uploadUrl
+    value: http://file-service.idev.svc.public.local:9902
+  - name: bpmUrl
+    value: http://spaas-idev.space.com
+  - name: spaasUrl
+    value: http://spaas-bpm-designer.idev.svc.public.local
